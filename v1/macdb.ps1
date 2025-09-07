@@ -4,11 +4,11 @@ Polished cross-platform employee lookup for CSV “tables”
 
 .DESCRIPTION
 - Each CSV file in the folder represents a location
-- Columns: TempID, ID, JOB_DEF, FILIAL, COMMENT
+- Columns: SID, ID, JOB_DEF, FILIAL, COMMENT
 - Multi-keyword search with weighted scoring
 - Index-style output for multiple results with headers
 .PARAMETER Query
-Space-separated keywords (ID, TempID, JOB_DEF, FILIAL, COMMENT)
+Space-separated keywords (ID, SID, JOB_DEF, FILIAL, COMMENT)
 .PARAMETER DatabaseDir
 Folder containing CSV files (default: ./test_db)
 #>
