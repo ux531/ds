@@ -38,7 +38,7 @@ Get-ChildItem -Path $DatabaseDir -Filter "*.csv" | ForEach-Object {
         $score = 0
         foreach ($kw in $keywords) {
             if ($row.ID -match $kw)       { $score += 5 }
-            if ($row.TempID -match $kw)   { $score += 5 }
+            if ($row.SID -match $kw)   { $score += 5 }
             if ($row.JOB_DEF -match $kw)  { $score += 3 }
             if ($row.FILIAL -match $kw)   { $score += 2 }
             if ($row.COMMENT -match $kw)  { $score += 1 }
@@ -47,7 +47,7 @@ Get-ChildItem -Path $DatabaseDir -Filter "*.csv" | ForEach-Object {
         if ($score -gt 0) {
             $results += [PSCustomObject]@{
                 Location = $location
-                TempID   = $row.TempID
+                SID      = $row.SID
                 ID       = $row.ID
                 JOB_DEF  = $row.JOB_DEF
                 FILIAL   = $row.FILIAL
@@ -75,8 +75,8 @@ if ($sortedResults.Count -eq 0) {
 
         Write-Host $header
         Write-Host ("Location    : {0}" -f $r.Location)
-        Write-Host ("TempID      : {0}" -f $r.TempID)
-        Write-Host ("ID          : {0}" -f $r.ID)
+        Write-Host ("SID         : {0}" -f $r.SID?.ToUpper())
+        Write-Host ("ID          : {0}" -f $r.ID?.ToUpper())
         Write-Host ("JOB_DEF     : {0}" -f $r.JOB_DEF)
         Write-Host ("FILIAL      : {0}" -f $r.FILIAL)
         Write-Host ("COMMENT     : {0}" -f $r.COMMENT)
