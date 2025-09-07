@@ -107,7 +107,7 @@ foreach ($res in $results) {
     Write-Host "### Processing file: $($res.File) ###"
 
     if ($isTop) {
-        Write-Host ("--- Candidate 1 (Top Match) 🏆 (Score: {0}) ---" -f $res.Score)
+        Write-Host ("--- Candidate 1 (Top Match) 🏆 (Score: {0}) ---" -f $res.Score) -ForegroundColor Cyan
         $isTop = $false
     } else {
         Write-Host ("--- Candidate (Score: {0}) ---" -f $res.Score)
