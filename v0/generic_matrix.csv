@@ -1,0 +1,19 @@
+keyword;phrase;suggestion
+archimed;access to menu SWIFT Transactions;"For Archimed to allow access to ""SWIFT Transactions"": In Add AD group: APG Archimed; In BankWay for JD add DK5555"
+mfa|account|password|error|login;Mfa account password error login;Needs MFA reset
+mail|permission|access denied|email;Permissions denied, access denied;Needs APG Mail group in Active Directory. Wrong email address.
+crm|groups;Crm access;Needs APG CRM Admin group in Active Directory.
+каса|главна|киб|заместване;Каса с кик, главна каса, заместване на мениджър;"Change JD to PBRYNK6; In BankWay;  - AL to 50;  - AC to 9;  - Confirmation to Yes"
+сбо|remote|overwrite|swift|bisera;Сбо remote overwrite with swift бисера;Change JD to BRIBRK6
+clavis|оператор|swift;Клавис оператор;Change JD to CLAVBN6
+извлечения|жалби|;;"In BankWay; - Assign DK5555 to JD"
+vpn;Vpn access required;Advise user to restart their VPN client and check their network connection.
+ssl|certificate|error;Ssl error, certificate required, error;A general application error has occurred. Advise the user to clear their browser cache and try again.
+wireless;Wifi for office, wireless access;Add user to APG Wireless Admin group in Active Directory.
+clavis;Access to calvis, достъп до клавис;Add user to APG CLAVIS Admin group in Active Directory.
+crm admin;Crm administrator;Add user to APG CRM Admin group in Active Directory.
+apg mail;Outlook mail, email, teams and outlook;Add user to APG Mail group in Active Directory.
+account locked;Account lock, account disabled;Check if the account is locked in Active Directory or relevant system.
+password expired;Password not working, need new password, I can’t login;Advise user to reset their password in AD.
+permission denied|access denied;Need access to, rights, required access, permissions denied, access denied;Grant the user the necessary permissions for the requested system.
+general error;;Advise user to restart application

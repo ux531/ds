@@ -1,0 +1,196 @@
+MainMenu,MainMenuID,SubMenu,ID,Description,Action,Enabled
+Users,MNU-0001,All users,SUB-0001,Manage all users in the directory,Create new user,Enabled
+Users,MNU-0001,All users,SUB-0001,Manage all users in the directory,Delete user,Disabled
+Users,MNU-0001,All users,SUB-0001,Manage all users in the directory,Edit properties,Enabled
+Users,MNU-0001,Deleted users,SUB-0002,Manage deleted users,Restore user,Enabled
+Users,MNU-0001,Deleted users,SUB-0002,Manage deleted users,Permanently delete,Disabled
+Users,MNU-0001,Deleted users,SUB-0002,Manage deleted users,View details,Enabled
+Users,MNU-0001,User settings,SUB-0003,Configure user settings,Update restrictions,Enabled
+Users,MNU-0001,User settings,SUB-0003,Configure user settings,Manage app access,Disabled
+Users,MNU-0001,User settings,SUB-0003,Configure user settings,View settings,Enabled
+Users,MNU-0001,Authentication methods,SUB-0004,Manage authentication methods,Register method,Enabled
+Users,MNU-0001,Authentication methods,SUB-0004,Manage authentication methods,Reset MFA,Disabled
+Users,MNU-0001,Authentication methods,SUB-0004,Manage authentication methods,View methods,Enabled
+Users,MNU-0001,Password reset,SUB-0005,Manage self-service password reset,Enable SSPR,Enabled
+Users,MNU-0001,Password reset,SUB-0005,Manage self-service password reset,Reset password,Disabled
+Users,MNU-0001,Password reset,SUB-0005,Manage self-service password reset,View policy,Enabled
+Groups,MNU-0002,All groups,SUB-0006,Manage all groups,Create group,Enabled
+Groups,MNU-0002,All groups,SUB-0006,Manage all groups,Delete group,Disabled
+Groups,MNU-0002,All groups,SUB-0006,Manage all groups,Edit group,Enabled
+Groups,MNU-0002,Expired groups,SUB-0007,Manage expired groups,Renew group,Enabled
+Groups,MNU-0002,Expired groups,SUB-0007,Manage expired groups,Delete expired,Disabled
+Groups,MNU-0002,Expired groups,SUB-0007,Manage expired groups,View expired,Enabled
+Groups,MNU-0002,Groups settings,SUB-0008,Configure group settings,Update settings,Enabled
+Groups,MNU-0002,Groups settings,SUB-0008,Configure group settings,Manage self-service,Disabled
+Groups,MNU-0002,Groups settings,SUB-0008,Configure group settings,View settings,Enabled
+Groups,MNU-0002,Naming policy,SUB-0009,Manage group naming policy,Add policy,Enabled
+Groups,MNU-0002,Naming policy,SUB-0009,Manage group naming policy,Remove policy,Disabled
+Groups,MNU-0002,Naming policy,SUB-0009,Manage group naming policy,Edit policy,Enabled
+Groups,MNU-0002,Bulk operations,SUB-0010,Perform bulk group operations,Bulk create,Enabled
+Groups,MNU-0002,Bulk operations,SUB-0010,Perform bulk group operations,Bulk delete,Disabled
+Groups,MNU-0002,Bulk operations,SUB-0010,Perform bulk group operations,Bulk update,Enabled
+External Identities,MNU-0003,External collaboration settings,SUB-0011,Configure collaboration settings,Update settings,Enabled
+External Identities,MNU-0003,External collaboration settings,SUB-0011,Configure collaboration settings,Restrict guests,Disabled
+External Identities,MNU-0003,External collaboration settings,SUB-0011,Configure collaboration settings,View settings,Enabled
+External Identities,MNU-0003,Cross-tenant access settings,SUB-0012,Manage cross-tenant access,Add tenant,Enabled
+External Identities,MNU-0003,Cross-tenant access settings,SUB-0012,Manage cross-tenant access,Remove tenant,Disabled
+External Identities,MNU-0003,Cross-tenant access settings,SUB-0012,Manage cross-tenant access,Edit access,Enabled
+External Identities,MNU-0003,All identity providers,SUB-0013,Manage identity providers,Add provider,Enabled
+External Identities,MNU-0003,All identity providers,SUB-0013,Manage identity providers,Delete provider,Disabled
+External Identities,MNU-0003,All identity providers,SUB-0013,Manage identity providers,View providers,Enabled
+External Identities,MNU-0003,User flows,SUB-0014,Manage user flows,Create flow,Enabled
+External Identities,MNU-0003,User flows,SUB-0014,Manage user flows,Delete flow,Disabled
+External Identities,MNU-0003,User flows,SUB-0014,Manage user flows,Edit flow,Enabled
+External Identities,MNU-0003,Lifecycle management,SUB-0015,Manage guest lifecycle,Provision guest,Enabled
+External Identities,MNU-0003,Lifecycle management,SUB-0015,Manage guest lifecycle,Deprovision guest,Disabled
+External Identities,MNU-0003,Lifecycle management,SUB-0015,Manage guest lifecycle,View status,Enabled
+Roles and administrators,MNU-0004,Microsoft Entra roles,SUB-0016,Manage Entra roles,Assign role,Enabled
+Roles and administrators,MNU-0004,Microsoft Entra roles,SUB-0016,Manage Entra roles,Revoke role,Disabled
+Roles and administrators,MNU-0004,Microsoft Entra roles,SUB-0016,Manage Entra roles,View roles,Enabled
+Roles and administrators,MNU-0004,Role assignments,SUB-0017,Manage role assignments,Add assignment,Enabled
+Roles and administrators,MNU-0004,Role assignments,SUB-0017,Manage role assignments,Remove assignment,Disabled
+Roles and administrators,MNU-0004,Role assignments,SUB-0017,Manage role assignments,View assignments,Enabled
+Roles and administrators,MNU-0004,PIM for roles,SUB-0018,Manage PIM for roles,Activate role,Enabled
+Roles and administrators,MNU-0004,PIM for roles,SUB-0018,Manage PIM for roles,Deactivate role,Disabled
+Roles and administrators,MNU-0004,PIM for roles,SUB-0018,Manage PIM for roles,View PIM,Enabled
+Roles and administrators,MNU-0004,Role settings,SUB-0019,Configure role settings,Update settings,Enabled
+Roles and administrators,MNU-0004,Role settings,SUB-0019,Configure role settings,Reset settings,Disabled
+Roles and administrators,MNU-0004,Role settings,SUB-0019,Configure role settings,View settings,Enabled
+Roles and administrators,MNU-0004,PIM for groups,SUB-0020,Manage PIM for groups,Assign group role,Enabled
+Roles and administrators,MNU-0004,PIM for groups,SUB-0020,Manage PIM for groups,Revoke group role,Disabled
+Roles and administrators,MNU-0004,PIM for groups,SUB-0020,Manage PIM for groups,View group PIM,Enabled
+Administrative units,MNU-0005,All units,SUB-0021,Manage administrative units,Create unit,Enabled
+Administrative units,MNU-0005,All units,SUB-0021,Manage administrative units,Delete unit,Disabled
+Administrative units,MNU-0005,All units,SUB-0021,Manage administrative units,Edit unit,Enabled
+Administrative units,MNU-0005,Properties,SUB-0022,Manage unit properties,Update properties,Enabled
+Administrative units,MNU-0005,Properties,SUB-0022,Manage unit properties,Reset properties,Disabled
+Administrative units,MNU-0005,Properties,SUB-0022,Manage unit properties,View properties,Enabled
+Administrative units,MNU-0005,Roles,SUB-0023,Manage roles in units,Assign role,Enabled
+Administrative units,MNU-0005,Roles,SUB-0023,Manage roles in units,Revoke role,Disabled
+Administrative units,MNU-0005,Roles,SUB-0023,Manage roles in units,View roles,Enabled
+Administrative units,MNU-0005,Users,SUB-0024,Manage users in units,Add user,Enabled
+Administrative units,MNU-0005,Users,SUB-0024,Manage users in units,Remove user,Disabled
+Administrative units,MNU-0005,Users,SUB-0024,Manage users in units,View users,Enabled
+Administrative units,MNU-0005,Groups,SUB-0025,Manage groups in units,Add group,Enabled
+Administrative units,MNU-0005,Groups,SUB-0025,Manage groups in units,Remove group,Disabled
+Administrative units,MNU-0005,Groups,SUB-0025,Manage groups in units,View groups,Enabled
+Delegated admin partners,MNU-0006,All partners,SUB-0026,Manage delegated partners,Activate partner,Enabled
+Delegated admin partners,MNU-0006,All partners,SUB-0026,Manage delegated partners,Deactivate partner,Disabled
+Delegated admin partners,MNU-0006,All partners,SUB-0026,Manage delegated partners,View partners,Enabled
+Delegated admin partners,MNU-0006,Partner relationships,SUB-0027,Manage relationships,Create relationship,Enabled
+Delegated admin partners,MNU-0006,Partner relationships,SUB-0027,Manage relationships,Delete relationship,Disabled
+Delegated admin partners,MNU-0006,Partner relationships,SUB-0027,Manage relationships,Edit relationship,Enabled
+Delegated admin partners,MNU-0006,Delegated roles,SUB-0028,Manage delegated roles,Assign role,Enabled
+Delegated admin partners,MNU-0006,Delegated roles,SUB-0028,Manage delegated roles,Revoke role,Disabled
+Delegated admin partners,MNU-0006,Delegated roles,SUB-0028,Manage delegated roles,View roles,Enabled
+Delegated admin partners,MNU-0006,Audit logs,SUB-0029,View audit logs for partners,Search logs,Enabled
+Delegated admin partners,MNU-0006,Audit logs,SUB-0029,View audit logs for partners,Export logs,Disabled
+Delegated admin partners,MNU-0006,Audit logs,SUB-0029,View audit logs for partners,View details,Enabled
+Delegated admin partners,MNU-0006,Troubleshooting,SUB-0030,Troubleshoot partner issues,Run diagnostics,Enabled
+Delegated admin partners,MNU-0006,Troubleshooting,SUB-0030,Troubleshoot partner issues,Reset config,Disabled
+Delegated admin partners,MNU-0006,Troubleshooting,SUB-0030,Troubleshoot partner issues,View issues,Enabled
+Enterprise applications,MNU-0007,All applications,SUB-0031,Manage enterprise apps,Add application,Enabled
+Enterprise applications,MNU-0007,All applications,SUB-0031,Manage enterprise apps,Remove application,Disabled
+Enterprise applications,MNU-0007,All applications,SUB-0031,Manage enterprise apps,Edit app,Enabled
+Enterprise applications,MNU-0007,Application proxy,SUB-0032,Manage app proxy,Add connector,Enabled
+Enterprise applications,MNU-0007,Application proxy,SUB-0032,Manage app proxy,Remove connector,Disabled
+Enterprise applications,MNU-0007,Application proxy,SUB-0032,Manage app proxy,View connectors,Enabled
+Enterprise applications,MNU-0007,User settings,SUB-0033,Configure user settings for apps,Update settings,Enabled
+Enterprise applications,MNU-0007,User settings,SUB-0033,Configure user settings for apps,Reset settings,Disabled
+Enterprise applications,MNU-0007,User settings,SUB-0033,Configure user settings for apps,View settings,Enabled
+Enterprise applications,MNU-0007,Consent and permissions,SUB-0034,Manage consents,Grant consent,Enabled
+Enterprise applications,MNU-0007,Consent and permissions,SUB-0034,Manage consents,Revoke consent,Disabled
+Enterprise applications,MNU-0007,Consent and permissions,SUB-0034,Manage consents,View consents,Enabled
+Enterprise applications,MNU-0007,Conditional Access,SUB-0035,Manage conditional access,Create policy,Enabled
+Enterprise applications,MNU-0007,Conditional Access,SUB-0035,Manage conditional access,Delete policy,Disabled
+Enterprise applications,MNU-0007,Conditional Access,SUB-0035,Manage conditional access,Edit policy,Enabled
+Devices,MNU-0008,All devices,SUB-0036,Manage all devices,Register device,Enabled
+Devices,MNU-0008,All devices,SUB-0036,Manage all devices,Delete device,Disabled
+Devices,MNU-0008,All devices,SUB-0036,Manage all devices,View devices,Enabled
+Devices,MNU-0008,Device settings,SUB-0037,Configure device settings,Update settings,Enabled
+Devices,MNU-0008,Device settings,SUB-0037,Configure device settings,Reset settings,Disabled
+Devices,MNU-0008,Device settings,SUB-0037,Configure device settings,View settings,Enabled
+Devices,MNU-0008,BitLocker keys,SUB-0038,Manage BitLocker keys,Recover key,Enabled
+Devices,MNU-0008,BitLocker keys,SUB-0038,Manage BitLocker keys,Delete key,Disabled
+Devices,MNU-0008,BitLocker keys,SUB-0038,Manage BitLocker keys,View keys,Enabled
+Devices,MNU-0008,Bulk operations,SUB-0039,Perform bulk device actions,Bulk update,Enabled
+Devices,MNU-0008,Bulk operations,SUB-0039,Perform bulk device actions,Bulk delete,Disabled
+Devices,MNU-0008,Bulk operations,SUB-0039,Perform bulk device actions,Bulk restart,Enabled
+Devices,MNU-0008,Audit logs,SUB-0040,View device audit logs,Search logs,Enabled
+Devices,MNU-0008,Audit logs,SUB-0040,View device audit logs,Export logs,Disabled
+Devices,MNU-0008,Audit logs,SUB-0040,View device audit logs,View details,Enabled
+App registrations,MNU-0009,All applications,SUB-0041,Manage app registrations,Register app,Enabled
+App registrations,MNU-0009,All applications,SUB-0041,Manage app registrations,Delete app,Disabled
+App registrations,MNU-0009,All applications,SUB-0041,Manage app registrations,Edit app,Enabled
+App registrations,MNU-0009,Certificates & secrets,SUB-0042,Manage certificates and secrets,Add certificate,Enabled
+App registrations,MNU-0009,Certificates & secrets,SUB-0042,Manage certificates and secrets,Remove secret,Disabled
+App registrations,MNU-0009,Certificates & secrets,SUB-0042,Manage certificates and secrets,View secrets,Enabled
+App registrations,MNU-0009,Owners,SUB-0043,Manage app owners,Add owner,Enabled
+App registrations,MNU-0009,Owners,SUB-0043,Manage app owners,Remove owner,Disabled
+App registrations,MNU-0009,Owners,SUB-0043,Manage app owners,View owners,Enabled
+App registrations,MNU-0009,Manifest,SUB-0044,Manage app manifest,Edit manifest,Enabled
+App registrations,MNU-0009,Manifest,SUB-0044,Manage app manifest,Reset manifest,Disabled
+App registrations,MNU-0009,Manifest,SUB-0044,Manage app manifest,View manifest,Enabled
+App registrations,MNU-0009,API permissions,SUB-0045,Manage API permissions,Grant permission,Enabled
+App registrations,MNU-0009,API permissions,SUB-0045,Manage API permissions,Revoke permission,Disabled
+App registrations,MNU-0009,API permissions,SUB-0045,Manage API permissions,View permissions,Enabled
+Identity Governance,MNU-0010,Entitlement management,SUB-0046,Manage entitlement packages,Create package,Enabled
+Identity Governance,MNU-0010,Entitlement management,SUB-0046,Manage entitlement packages,Delete package,Disabled
+Identity Governance,MNU-0010,Entitlement management,SUB-0046,Manage entitlement packages,Edit package,Enabled
+Identity Governance,MNU-0010,Access reviews,SUB-0047,Manage access reviews,Create review,Enabled
+Identity Governance,MNU-0010,Access reviews,SUB-0047,Manage access reviews,Stop review,Disabled
+Identity Governance,MNU-0010,Access reviews,SUB-0047,Manage access reviews,View reviews,Enabled
+Identity Governance,MNU-0010,Access packages,SUB-0048,Manage access packages,Add package,Enabled
+Identity Governance,MNU-0010,Access packages,SUB-0048,Manage access packages,Remove package,Disabled
+Identity Governance,MNU-0010,Access packages,SUB-0048,Manage access packages,Edit package,Enabled
+Identity Governance,MNU-0010,Connected organizations,SUB-0049,Manage connected organizations,Add organization,Enabled
+Identity Governance,MNU-0010,Connected organizations,SUB-0049,Manage connected organizations,Remove organization,Disabled
+Identity Governance,MNU-0010,Connected organizations,SUB-0049,Manage connected organizations,View organizations,Enabled
+Identity Governance,MNU-0010,Identity governance settings,SUB-0050,Configure governance settings,Update settings,Enabled
+Identity Governance,MNU-0010,Identity governance settings,SUB-0050,Configure governance settings,Reset settings,Disabled
+Identity Governance,MNU-0010,Identity governance settings,SUB-0050,Configure governance settings,View settings,Enabled
+Application proxy,MNU-0011,Applications,SUB-0051,Manage application proxy apps,Add app,Enabled
+Application proxy,MNU-0011,Applications,SUB-0051,Manage application proxy apps,Remove app,Disabled
+Application proxy,MNU-0011,Applications,SUB-0051,Manage application proxy apps,Edit app,Enabled
+Application proxy,MNU-0011,Connectors,SUB-0052,Manage proxy connectors,Add connector,Enabled
+Application proxy,MNU-0011,Connectors,SUB-0052,Manage proxy connectors,Remove connector,Disabled
+Application proxy,MNU-0011,Connectors,SUB-0052,Manage proxy connectors,View connectors,Enabled
+Application proxy,MNU-0011,Connector groups,SUB-0053,Manage connector groups,Create group,Enabled
+Application proxy,MNU-0011,Connector groups,SUB-0053,Manage connector groups,Delete group,Disabled
+Application proxy,MNU-0011,Connector groups,SUB-0053,Manage connector groups,Edit group,Enabled
+Application proxy,MNU-0011,Diagnostics,SUB-0054,Troubleshoot application proxy,Run diagnostics,Enabled
+Application proxy,MNU-0011,Diagnostics,SUB-0054,Troubleshoot application proxy,Reset config,Disabled
+Application proxy,MNU-0011,Diagnostics,SUB-0054,Troubleshoot application proxy,View issues,Enabled
+Application proxy,MNU-0011,Settings,SUB-0055,Configure proxy settings,Update settings,Enabled
+Application proxy,MNU-0011,Settings,SUB-0055,Configure proxy settings,Reset settings,Disabled
+Application proxy,MNU-0011,Settings,SUB-0055,Configure proxy settings,View settings,Enabled
+Custom security attributes,MNU-0012,Attribute sets,SUB-0056,Manage attribute sets,Create set,Enabled
+Custom security attributes,MNU-0012,Attribute sets,SUB-0056,Manage attribute sets,Delete set,Disabled
+Custom security attributes,MNU-0012,Attribute sets,SUB-0056,Manage attribute sets,Edit set,Enabled
+Custom security attributes,MNU-0012,Attributes,SUB-0057,Manage custom attributes,Add attribute,Enabled
+Custom security attributes,MNU-0012,Attributes,SUB-0057,Manage custom attributes,Remove attribute,Disabled
+Custom security attributes,MNU-0012,Attributes,SUB-0057,Manage custom attributes,View attributes,Enabled
+Custom security attributes,MNU-0012,Assignments,SUB-0058,Manage attribute assignments,Assign attribute,Enabled
+Custom security attributes,MNU-0012,Assignments,SUB-0058,Manage attribute assignments,Remove assignment,Disabled
+Custom security attributes,MNU-0012,Assignments,SUB-0058,Manage attribute assignments,View assignments,Enabled
+Custom security attributes,MNU-0012,Permissions,SUB-0059,Manage attribute permissions,Grant permission,Enabled
+Custom security attributes,MNU-0012,Permissions,SUB-0059,Manage attribute permissions,Revoke permission,Disabled
+Custom security attributes,MNU-0012,Permissions,SUB-0059,Manage attribute permissions,View permissions,Enabled
+Custom security attributes,MNU-0012,Audit logs,SUB-0060,View attribute audit logs,Search logs,Enabled
+Custom security attributes,MNU-0012,Audit logs,SUB-0060,View attribute audit logs,Export logs,Disabled
+Custom security attributes,MNU-0012,Audit logs,SUB-0060,View attribute audit logs,View details,Enabled
+Licenses,MNU-0013,All products,SUB-0061,Manage licensed products,Add product,Enabled
+Licenses,MNU-0013,All products,SUB-0061,Manage licensed products,Remove product,Disabled
+Licenses,MNU-0013,All products,SUB-0061,Manage licensed products,View products,Enabled
+Licenses,MNU-0013,Licensed users,SUB-0062,Manage user licenses,Assign license,Enabled
+Licenses,MNU-0013,Licensed users,SUB-0062,Manage user licenses,Revoke license,Disabled
+Licenses,MNU-0013,Licensed users,SUB-0062,Manage user licenses,View licenses,Enabled
+Licenses,MNU-0013,Licensed groups,SUB-0063,Manage group licenses,Assign to group,Enabled
+Licenses,MNU-0013,Licensed groups,SUB-0063,Manage group licenses,Remove from group,Disabled
+Licenses,MNU-0013,Licensed groups,SUB-0063,Manage group licenses,View groups,Enabled
+Licenses,MNU-0013,Audit logs,SUB-0064,View license audit logs,Search logs,Enabled
+Licenses,MNU-0013,Audit logs,SUB-0064,View license audit logs,Export logs,Disabled
+Licenses,MNU-0013,Audit logs,SUB-0064,View license audit logs,View details,Enabled
+Licenses,MNU-0013,Troubleshooting + support,SUB-0065,Troubleshoot licenses,Run diagnostics,Enabled
+Licenses,MNU-0013,Troubleshooting + support,SUB-0065,Troubleshoot licenses,Contact support,Disabled
+Licenses,MNU-0013,Troubleshooting + support,SUB-0065,Troubleshoot licenses,View issues,Enabled
