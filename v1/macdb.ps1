@@ -75,7 +75,7 @@ if ($sortedResults.Count -eq 0) {
 
         Write-Host $header
         Write-Host ("Location    : {0}" -f $r.Location)
-        Write-Host ("SID         : {0}" -f $r.SID?.ToUpper())
+        Write-Host ("SID         : {0}" -f $r.SID?.ToUpper()) -ForegroundColor Cyan
         Write-Host ("ID          : {0}" -f $r.ID?.ToUpper())
         Write-Host ("JOB_DEF     : {0}" -f $r.JOB_DEF)
         Write-Host ("FILIAL      : {0}" -f $r.FILIAL)
