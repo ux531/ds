@@ -1,36 +1,113 @@
-# Sort by Score descending
-$sortedResults = $results | Sort-Object @{Expression='Score';Descending=$true}, @{Expression='Location';Descending=$false}
+<#
+.SYNOPSIS
+Search employee records in Access MDB database.
+.DESCRIPTION
+- Accepts either 1 argument (global search) or 2 arguments (location + ID).
+- Checks both ID and SID columns.
+- Requires Microsoft ACE OLEDB provider (installed with Office).
+#>
 
-if ($sortedResults.Count -eq 0) {
-    Write-Host "No records found matching query: $($Query -join ' ')"
-} else {
-    Write-Host "`n=== Employee Job Definitions ===`n"
+param(
+    [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]
+    [string[]]$Args,
 
-    $isTopMatch = $true
-    $locationSummary = @{}
+    [string]$DatabaseFile = ".\test_employees.mdb"
+)
 
-    foreach ($r in $sortedResults) {
-        $header = if ($isTopMatch) { "--- Candidate 1 (Top Match) 🏆 (Score: $($r.Score)) ---"; $isTopMatch=$false } 
-                  else { "--- Candidate (Score: $($r.Score)) ---" }
+if (-Not (Test-Path $DatabaseFile)) {
+    Write-Host "Database file not found: $DatabaseFile"
+    exit
+}
 
-        Write-Host $header
-        Write-Host ("Location    : {0}" -f $r.Location)
-        Write-Host ("TempID      : {0}" -f $r.TempID)
-        Write-Host ("ID          : {0}" -f $r.ID)
-        Write-Host ("JOB_DEF     : {0}" -f $r.JOB_DEF)
-        Write-Host ("FILIAL      : {0}" -f $r.FILIAL)
-        Write-Host ("COMMENT     : {0}" -f $r.COMMENT)
-        Write-Host "-------------------------------------"
+if ($Args.Count -eq 1) {
+    $searchMode = "global"
+    $searchId   = $Args[0]
+}
+elseif ($Args.Count -eq 2) {
+    $searchMode = "local"
+    $location   = $Args[0]
+    $searchId   = $Args[1]
+}
+else {
+    Write-Host "Usage:"
+    Write-Host "  ./windb.ps1 EMPLOYEE_ID"
+    Write-Host "  ./windb.ps1 LOCATION EMPLOYEE_ID"
+    exit
+}
 
-        # Collect location summary
-        if ($locationSummary.ContainsKey($r.Location)) {
-            $locationSummary[$r.Location]++
-        } else {
-            $locationSummary[$r.Location] = 1
+Write-Host "`n=== Employee Lookup ===`n"
+
+$results = @()
+
+$provider = "Microsoft.ACE.OLEDB.12.0"
+$connStr  = "Provider=$provider;Data Source=$DatabaseFile"
+$conn     = New-Object -ComObject ADODB.Connection
+$conn.Open($connStr)
+
+function Get-TableNames($conn) {
+    $rs = $conn.OpenSchema(20) # adSchemaTables
+    $tables = @()
+    while (-not $rs.EOF) {
+        $t = $rs.Fields.Item("TABLE_NAME").Value
+        if ($rs.Fields.Item("TABLE_TYPE").Value -eq "TABLE") {
+            $tables += $t
         }
+        $rs.MoveNext()
     }
+    $rs.Close()
+    return $tables
+}
 
-    # Optional: location summary
-    Write-Host "`nLocations matched: $($locationSummary.Keys -join ', ')"
-    Write-Host "Total matches: $($sortedResults.Count)"
+$tables = Get-TableNames $conn
+
+if ($searchMode -eq "local") {
+    if ($tables -notcontains $location) {
+        Write-Host "Location $location not found in database."
+        $conn.Close()
+        exit
+    }
+    $sql = "SELECT * FROM [$location] WHERE ID='$searchId' OR SID='$searchId'"
+    $rs = New-Object -ComObject ADODB.Recordset
+    $rs.Open($sql, $conn)
+    while (-not $rs.EOF) {
+        $results += [PSCustomObject]@{
+            Location = $location
+            ID       = $rs.Fields.Item("ID").Value
+            SID      = $rs.Fields.Item("SID").Value
+            JOB_DEF  = $rs.Fields.Item("JOB_DEF").Value
+            FILIAL   = $rs.Fields.Item("FILIAL").Value
+            COMMENT  = $rs.Fields.Item("COMMENT").Value
+        }
+        $rs.MoveNext()
+    }
+    $rs.Close()
+}
+else {
+    foreach ($table in $tables) {
+        $sql = "SELECT * FROM [$table] WHERE ID='$searchId' OR SID='$searchId'"
+        $rs = New-Object -ComObject ADODB.Recordset
+        $rs.Open($sql, $conn)
+        while (-not $rs.EOF) {
+            $results += [PSCustomObject]@{
+                Location = $table
+                ID       = $rs.Fields.Item("ID").Value
+                SID      = $rs.Fields.Item("SID").Value
+                JOB_DEF  = $rs.Fields.Item("JOB_DEF").Value
+                FILIAL   = $rs.Fields.Item("FILIAL").Value
+                COMMENT  = $rs.Fields.Item("COMMENT").Value
+            }
+            $rs.MoveNext()
+        }
+        $rs.Close()
+    }
+}
+
+$conn.Close()
+
+if ($results.Count -eq 0) {
+    Write-Host "No matching employee found."
+}
+else {
+    $results | Format-Table -AutoSize
+    Write-Host "`nTotal locations found: $($results.Count)`n"
 }

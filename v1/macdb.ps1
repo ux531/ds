@@ -1,95 +1,79 @@
 <#
 .SYNOPSIS
-Polished cross-platform employee lookup for CSV “tables”
-
+Search employee records in CSVs (test DB).
 .DESCRIPTION
-- Each CSV file in the folder represents a location
-- Columns: SID, ID, JOB_DEF, FILIAL, COMMENT
-- Multi-keyword search with weighted scoring
-- Index-style output for multiple results with headers
-.PARAMETER Query
-Space-separated keywords (ID, SID, JOB_DEF, FILIAL, COMMENT)
-.PARAMETER DatabaseDir
-Folder containing CSV files (default: ./test_db)
+- Accepts either 1 argument (global search) or 2 arguments (location + ID).
+- Checks both ID and SID columns.
 #>
 
 param(
-    [Parameter(Mandatory=$true, Position=0, ValueFromRemainingArguments=$true)]
-    [string[]]$Query,
+    [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]
+    [string[]]$Args,
 
     [string]$DatabaseDir = "./test_db"
 )
 
-if (-not (Test-Path $DatabaseDir)) {
-    Write-Host "Database folder not found: $DatabaseDir"
+if ($Args.Count -eq 1) {
+    $searchMode = "global"
+    $searchId   = $Args[0]
+}
+elseif ($Args.Count -eq 2) {
+    $searchMode = "local"
+    $location   = $Args[0]
+    $searchId   = $Args[1]
+}
+else {
+    Write-Host "Usage:"
+    Write-Host "  ./macdb.ps1 EMPLOYEE_ID"
+    Write-Host "  ./macdb.ps1 LOCATION EMPLOYEE_ID"
     exit
 }
 
+Write-Host "`n=== Employee Lookup ===`n"
+
 $results = @()
-$keywords = $Query | ForEach-Object { $_.ToLower() }
 
-# Loop over CSV files (locations)
-Get-ChildItem -Path $DatabaseDir -Filter "*.csv" | ForEach-Object {
-    $csvFile = $_.FullName
-    $location = $_.BaseName
-
-    $data = Import-Csv -Path $csvFile
-    foreach ($row in $data) {
-        $score = 0
-        foreach ($kw in $keywords) {
-            if ($row.ID -match $kw)       { $score += 5 }
-            if ($row.SID -match $kw)   { $score += 5 }
-            if ($row.JOB_DEF -match $kw)  { $score += 3 }
-            if ($row.FILIAL -match $kw)   { $score += 2 }
-            if ($row.COMMENT -match $kw)  { $score += 1 }
+if ($searchMode -eq "local") {
+    $file = Join-Path $DatabaseDir "$location.csv"
+    if (-Not (Test-Path $file)) {
+        Write-Host "Location $location not found."
+        exit
+    }
+    $rows = Import-Csv -Path $file
+    $matches = $rows | Where-Object { $_.ID -eq $searchId -or $_.SID -eq $searchId }
+    foreach ($m in $matches) {
+        $results += [PSCustomObject]@{
+            Location = $location
+            ID       = $m.ID
+            SID      = $m.SID
+            JOB_DEF  = $m.JOB_DEF
+            FILIAL   = $m.FILIAL
+            COMMENT  = $m.COMMENT
         }
-
-        if ($score -gt 0) {
+    }
+}
+else {
+    Get-ChildItem -Path $DatabaseDir -Filter "*.csv" | ForEach-Object {
+        $loc = $_.BaseName
+        $rows = Import-Csv -Path $_.FullName
+        $matches = $rows | Where-Object { $_.ID -eq $searchId -or $_.SID -eq $searchId }
+        foreach ($m in $matches) {
             $results += [PSCustomObject]@{
-                Location = $location
-                SID      = $row.SID
-                ID       = $row.ID
-                JOB_DEF  = $row.JOB_DEF
-                FILIAL   = $row.FILIAL
-                COMMENT  = $row.COMMENT
-                Score    = $score
+                Location = $loc
+                ID       = $m.ID
+                SID      = $m.SID
+                JOB_DEF  = $m.JOB_DEF
+                FILIAL   = $m.FILIAL
+                COMMENT  = $m.COMMENT
             }
         }
     }
 }
 
-# Sort descending by Score, then by Location
-$sortedResults = $results | Sort-Object @{Expression='Score';Descending=$true}, @{Expression='Location';Descending=$false}
-
-if ($sortedResults.Count -eq 0) {
-    Write-Host "No records found matching query: $($Query -join ' ')"
-} else {
-    Write-Host "`n=== Employee Job Definitions ===`n"
-
-    $isTopMatch = $true
-    $locationSummary = @{}
-
-    foreach ($r in $sortedResults) {
-        $header = if ($isTopMatch) { "--- Candidate 1 (Top Match) 🏆 (Score: $($r.Score)) ---"; $isTopMatch=$false } 
-                  else { "--- Candidate (Score: $($r.Score)) ---" }
-
-        Write-Host $header
-        Write-Host ("Location    : {0}" -f $r.Location)
-        Write-Host ("SID         : {0}" -f $r.SID?.ToUpper()) -ForegroundColor Cyan
-        Write-Host ("ID          : {0}" -f $r.ID?.ToUpper()) -ForegroundColor Magenta
-        Write-Host ("JOB_DEF     : {0}" -f $r.JOB_DEF)
-        Write-Host ("FILIAL      : {0}" -f $r.FILIAL)
-        Write-Host ("COMMENT     : {0}" -f $r.COMMENT)
-        Write-Host "-------------------------------------"
-
-        # Collect location summary
-        if ($locationSummary.ContainsKey($r.Location)) {
-            $locationSummary[$r.Location]++
-        } else {
-            $locationSummary[$r.Location] = 1
-        }
-    }
-
-    Write-Host "`nLocations matched: $($locationSummary.Keys -join ', ')"
-    Write-Host "Total matches: $($sortedResults.Count)"
+if ($results.Count -eq 0) {
+    Write-Host "No matching employee found."
+}
+else {
+    $results | Format-Table -AutoSize
+    Write-Host "`nTotal locations found: $($results.Count)`n"
 }
