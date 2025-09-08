@@ -3,7 +3,7 @@ archimed;access to menu SWIFT Transactions;PROC_001;AD: Add to group 'APG Archim
 mfa|account|password|error|login;Mfa account password error login;PROC_002;Needs MFA reset.
 mail|permission|access denied|email;Permissions denied, access denied;PROC_017;AD: Needs APG Mail group.
 crm|groups;Crm access;PROC_015;AD: Add to APG CRM Admin group.
-каса|главна|киб|заместване;КИБ с Каса, главна каса, заместване на мениджър;PROC_003;BankWay: Change JD to PBRYNK6 Set AL=50, AC=9, Confirmation=Yes.
+каса|главна|киб|заместване;КИБ с Каса, главна каса, заместване на мениджър;PROC_003;BankWay: Chage JD and access levels.
 сбо|remote|overwrite|swift|bisera;СБО remote overwrite with swift бисера;PROC_004;BankWay: Change JD to BRIBRK6.
 clavis|оператор|swift;Клавис оператор;PROC_016;AD: Add to APG CLAVIS Admin group.
 извлечения|жалби|;Извлечения по жалби на клиента;PROC_014;BankWay: Assign DK1313 to JD.

@@ -168,7 +168,7 @@ else
         IFS="$DELIMITER" read -r -a headers <<< "$HEADER_LINE"
 
         if (( is_top_match == 1 )); then
-          echo "--- Candidate 1 (Top Match) 🏆 (Score: $result_score) ---"
+          echo -e "\033[36m--- Candidate 1 (Top Match) 🏆 (Score: $result_score) ---\033[0m"
           is_top_match=0
         else
           echo "--- Candidate (Score: $result_score) ---"

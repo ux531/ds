@@ -1,7 +1,7 @@
 procedure_id;procedure_text
 PROC_001;"Procedure: Archimed SWIFT Access\n- AD: Add user to group APG Archimed for access to SWIFT Transactions."
 PROC_002;"Procedure: MFA Reset\n- Entra ID: Open Microsoft Entra admin center > Users > select user > Authentication methods.\n- Click 'Require re-register MFA' and 'Revoke MFA sessions'.\n- Remove existing authentication methods (phone/app) if present.\n- Ask the user to sign in and complete MFA setup."
-PROC_003;"Procedure: При заместване на мениджър: \n - Update JD to PBRYNK6 \n  - Set AL to 50 \n  - Set AC to 9 \n  - Set Confirmation to Yes."
+PROC_003;"Procedure: BankWay: \nСмени JD в зависимост от текущата позиция: \n - виж матрица [JD] \n - Ниво на достъп = 50 \n - Ниво на контол = 9 \n - Потвърждения = Да
 PROC_004;"Procedure: BankWay JD Overwrite\n- BankWay: Change JD to BRIBRK6."
 PROC_005;"Procedure: AD Mail Group Access\n- AD: Add user to group APG Mail for email and Teams access."
 PROC_006;"Procedure: Add User to AD Group\n- AD: Add user to the specified group in Active Directory based on the request."
