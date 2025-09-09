@@ -1,111 +1,93 @@
 <#
 .SYNOPSIS
-Search employee records in Access MDB database.
+    Employee/Job Definition Lookup in MDB file
 .DESCRIPTION
-- Accepts either 1 argument (global search) or 2 arguments (location + ID).
-- Checks both ID and SID columns.
-- Requires Microsoft ACE OLEDB provider (installed with Office).
+    - Accepts 1 argument (global search across all tables) or 2 arguments (specific table + search)
+    - Searches JD and SJD columns (case-insensitive)
+    - Outputs aligned, readable table
 #>
 
-param(
+param (
     [Parameter(Mandatory=$true, Position=0)]
-    [string[]]$Args
+    [string]$Arg1,
+
+    [Parameter(Position=1)]
+    [string]$Arg2
 )
 
-if (-Not (Test-Path $DatabaseFile)) {
-    Write-Host "Database file not found: $DatabaseFile"
+# === CONFIGURATION ===
+$MDBFile = "C:\Path\To\Database.mdb"   # <-- update path
+$ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=$MDBFile"
+
+# Determine search mode
+if ($PSBoundParameters.Count -eq 1) {
+    $SearchMode = "Global"
+    $SearchID = $Arg1
+} elseif ($PSBoundParameters.Count -eq 2) {
+    $SearchMode = "Local"
+    $TableName = $Arg1
+    $SearchID = $Arg2
+} else {
+    Write-Host "Usage:`n  .\macdb.ps1 EMPLOYEEID`n  .\macdb.ps1 TABLE EMPLOYEEID"
     exit
 }
 
-if ($Args.Count -eq 1) {
-    $searchMode = "global"
-    $searchId   = $Args[0]
-}
-elseif ($Args.Count -eq 2) {
-    $searchMode = "local"
-    $location   = $Args[0]
-    $searchId   = $Args[1]
-}
-else {
-    Write-Host "Usage:"
-    Write-Host "  ./windb.ps1 EMPLOYEE_ID"
-    Write-Host "  ./windb.ps1 LOCATION EMPLOYEE_ID"
-    exit
-}
+# Connect to MDB
+$Connection = New-Object System.Data.OleDb.OleDbConnection($ConnectionString)
+$Connection.Open()
 
-Write-Host "`n=== Employee Lookup ===`n"
+# Get tables
+$AllTables = $Connection.GetSchema("Tables") | Where-Object { $_.TABLE_TYPE -eq "TABLE" }
 
-$results = @()
-
-$provider = "Microsoft.ACE.OLEDB.12.0"
-$connStr  = "Provider=$provider;Data Source=$DatabaseFile"
-$conn     = New-Object -ComObject ADODB.Connection
-$conn.Open($connStr)
-
-function Get-TableNames($conn) {
-    $rs = $conn.OpenSchema(20) # adSchemaTables
-    $tables = @()
-    while (-not $rs.EOF) {
-        $t = $rs.Fields.Item("TABLE_NAME").Value
-        if ($rs.Fields.Item("TABLE_TYPE").Value -eq "TABLE") {
-            $tables += $t
-        }
-        $rs.MoveNext()
-    }
-    $rs.Close()
-    return $tables
-}
-
-$tables = Get-TableNames $conn
-
-if ($searchMode -eq "local") {
-    if ($tables -notcontains $location) {
-        Write-Host "Location $location not found in database."
-        $conn.Close()
+if ($SearchMode -eq "Local") {
+    $TablesToSearch = $AllTables | Where-Object { $_.TABLE_NAME -eq $TableName }
+    if (-not $TablesToSearch) {
+        Write-Host "Table '$TableName' not found in MDB."
         exit
     }
-    $sql = "SELECT * FROM [$location] WHERE ID='$searchId' OR SID='$searchId'"
-    $rs = New-Object -ComObject ADODB.Recordset
-    $rs.Open($sql, $conn)
-    while (-not $rs.EOF) {
-        $results += [PSCustomObject]@{
-            Location = $location
-            ID       = $rs.Fields.Item("ID").Value
-            SID      = $rs.Fields.Item("SID").Value
-            JOB_DEF  = $rs.Fields.Item("JOB_DEF").Value
-            FILIAL   = $rs.Fields.Item("FILIAL").Value
-            COMMENT  = $rs.Fields.Item("COMMENT").Value
-        }
-        $rs.MoveNext()
-    }
-    $rs.Close()
+} else {
+    $TablesToSearch = $AllTables
 }
-else {
-    foreach ($table in $tables) {
-        $sql = "SELECT * FROM [$table] WHERE ID='$searchId' OR SID='$searchId'"
-        $rs = New-Object -ComObject ADODB.Recordset
-        $rs.Open($sql, $conn)
-        while (-not $rs.EOF) {
-            $results += [PSCustomObject]@{
-                Location = $table
-                ID       = $rs.Fields.Item("ID").Value
-                SID      = $rs.Fields.Item("SID").Value
-                JOB_DEF  = $rs.Fields.Item("JOB_DEF").Value
-                FILIAL   = $rs.Fields.Item("FILIAL").Value
-                COMMENT  = $rs.Fields.Item("COMMENT").Value
+
+# Collect results
+$Results = @()
+
+foreach ($table in $TablesToSearch) {
+    $Table = $table.TABLE_NAME
+
+    # Get column names
+    $Columns = $Connection.GetSchema("Columns", @($null, $null, $Table, $null)) | Select-Object -ExpandProperty COLUMN_NAME
+
+    if ($Columns -contains "JD" -and $Columns -contains "SJD") {
+        $Query = "SELECT * FROM [$Table]"
+        $Command = $Connection.CreateCommand()
+        $Command.CommandText = $Query
+
+        $Adapter = New-Object System.Data.OleDb.OleDbDataAdapter $Command
+        $DataSet = New-Object System.Data.DataSet
+        $Adapter.Fill($DataSet) | Out-Null
+
+        foreach ($row in $DataSet.Tables[0].Rows) {
+            if (($row.JD -eq $SearchID) -or ($row.SJD -eq $SearchID)) {
+                $Results += [PSCustomObject]@{
+                    Table    = $Table
+                    JD       = $row.JD
+                    SJD      = $row.SJD
+                    Employee = if ($Columns -contains "EmployeeID") { $row.EmployeeID } else { "" }
+                    Comment  = if ($Columns -contains "Comment") { $row.Comment } else { "" }
+                }
             }
-            $rs.MoveNext()
         }
-        $rs.Close()
     }
 }
 
-$conn.Close()
+$Connection.Close()
 
-if ($results.Count -eq 0) {
+# Display results
+if (-not $Results) {
     Write-Host "No matching employee found."
-}
-else {
-    $results | Format-Table -AutoSize
-    Write-Host "`nTotal locations found: $($results.Count)`n"
+} else {
+    # Print aligned table
+    $Results | Format-Table Table, Employee, JD, SJD, Comment -AutoSize
+    Write-Host "`nTotal matches found: $($Results.Count)"
 }
