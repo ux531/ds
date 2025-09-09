@@ -8,10 +8,8 @@ Search employee records in Access MDB database.
 #>
 
 param(
-    [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]
-    [string[]]$Args,
-
-    [string]$DatabaseFile = ".\test_employees.mdb"
+    [Parameter(Mandatory=$true, Position=0)]
+    [string[]]$Args
 )
 
 if (-Not (Test-Path $DatabaseFile)) {
