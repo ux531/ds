@@ -1,0 +1,45 @@
+ok now let's make sure after parsing this :
+
+---
+
+## Reset / Ресет пароли
+
+### Procedure
+- В AD ресет на паролата и задаване на default
+- Формат: SiLn@<timestamp>
+
+### [re] Email шаблон
+- Акаунтът е възстановен.
+- Назначена е нова парола SiLn@Parola1214 за AD, която трябва да се смени след първо влизане.
+
+### Keywords: Reset; Ресет; password reset; password; парола; акаунт; unlock
+
+#### PR000002
+
+---
+
+in json we get this :
+
+{
+      "name": "Reset / Ресет пароли",
+      "sections": [
+        {
+          "keywords": "Reset; Ресет; password reset; password; парола; акаунт; unlock",
+          "steps": [
+            "- В AD ресет на паролата и задаване на default"
+            "- Формат: SiLn@<timestamp>",
+            ]
+        }
+        
+        
+
+
+        {
+          "reply": "Email шаблон",
+          "steps": [
+            "- Акаунтът е възстановен.",
+            "- Назначена е нова парола SiLn@Parola{h:m} за AD, която трябва да се смени след първо влизане."
+            ]
+        }
+      ]
+    }

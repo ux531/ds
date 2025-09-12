@@ -1,8 +1,4 @@
-# DSK / IDM / AD / IDM – Оперативни процедури
-
-> Работен наръчник с чеклисти, шаблони за имейли и инструкции. Всички действия се изпълняват спрямо заявката (WO/Order) и вътрешните политики на ДСК.
-
----
+--- # open procedure
 
 ## New Account (Нов акаунт)
 
@@ -66,15 +62,6 @@
   - M365 Authentication - Passwordless and SSPR
   - M365 Licensing - E5d
 
-### Access DB / Dimension / Bankway
-- Access DB: добавете нов потребител на база Location от WO [CU].
-- Dimension: добавете потребителя от IDM само за HO, иначе чакайте заявка.
-- Override Auth Level: 10
-- Restrict Acct Trans: N
-- Restricted Access: 0
-- Обновете Bankway и Approve.
-- В DIM с UID – Change pass: 1 / 9.
-
 ### [re] Email шаблон
 - До: ITHO@dskbankbg.mail.onmicrosoft.com; IT.Regions@dskbank.bg
 - Текст:
@@ -87,7 +74,9 @@
 
 #### PR000001
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Reset / Ресет пароли
 
@@ -104,7 +93,9 @@
 
 #### PR000002
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Change / Промяна на длъжност (JD)
 
@@ -126,7 +117,9 @@
 
 #### PR000003
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Location / Командировка и смяна на локация
 
@@ -141,7 +134,9 @@
 
 #### PR000004
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Add / Change – Teller
 
@@ -158,7 +153,9 @@
 
 #### PR000005
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Достъп до SonarQube
 
@@ -169,7 +166,9 @@
 
 #### PR000006
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Добавяне на имейли в White list
 
@@ -180,7 +179,9 @@
 
 #### PR000007
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Reply / Отговори към заявители
 
@@ -189,16 +190,16 @@
 - Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 30 мин.
 - Достъпът е предоставен. Необходимо е да се разпишете DIMENSION и BANKWAY.
 
-### Keywords: Reply; Отговор; шаблон; заявители; email; комуникация; response
-
 ### Teams съобщения
 - Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 48 часа.
 
-### Keywords: Teams; съобщение; Teams съобщения; уведомление; access notification
+### Keywords: Reply; Отговор; шаблон; заявители; email; комуникация; response
 
 #### PR000008
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Clavis – достъпи и заместване на мениджър
 
@@ -212,19 +213,31 @@
 
 #### PR000009
 
----
+--- # close procedure
 
+--- # open procedure
 
-### Начални пари на каса (СБО и КИБ)
-- DIM меню 1 / 16 – добавете начални пари по WO.
-- Ако касата е СБО / КИБ, добавете сумата според таблицата.
-- Потвърдете баланса.
+## Начални пари на каса (КИБ)
 
-### Keywords: Dimension; операции; каса; начални пари; СБО; КИБ; cash; operations
+### Procedure
+
+- В DIM проверете ID на служител и вземете текущата JD и я запишете.
+- Сменете текущате JD със 12345678
+- Върнете старата JD на служителя.
+
+### Keywords: начални пари; пари на каса; изравняване на каса
+
+## Reply / Отговори към заявители
+
+### [re] Procedure
+- Достъпът е предоставен. Необходимо е Log Off и Log On. Имате 30 минути да изравните касата. След изравняване на касата се обадете за възстановяване на вашият достъп.
+- Вашият достъп е възстановен. Необходимо е Log Off и Log On.
 
 #### PR000010
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Bulpost – заявка за достъп
 
@@ -237,7 +250,9 @@
 
 #### PR000011
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Отказан достъп – шаблон
 
@@ -250,7 +265,9 @@
 
 #### PR000012
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Одобрение – шаблон за имейл
 
@@ -263,7 +280,9 @@
 
 #### PR000013
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## След майчинство / двугодишен отпуск
 
@@ -276,7 +295,9 @@
 
 #### PR000014
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Инциденти – шаблон
 
@@ -289,7 +310,9 @@
 
 #### PR000015
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Offboarding accounts
 
@@ -302,7 +325,9 @@
 
 #### PR000016
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Add to Bankway & Dimension
 
@@ -315,21 +340,29 @@
 
 #### PR000017
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## DK / LOS groups (Кредитни карти – CAS)
 
 ### Procedure
-- КК в БДСК – изисква се Order attached / достъп „кредитни карти“.
-- В DIM с ID 1 / 16 вземете JD.
-- В BW > Admin > Access > Work definitions – по JD търсете DK9453.
-- В AD проверете FG групи и членовете – вземете модел за LOS групи.
-- Добавете към вашия UID:
-  - RLG LOS Credit Expert
-  - RLG LOS Credit Expert 2
-  - RuG LOS Branches
-  - RlG LOS Branch Manager (само мениджъри)
-  - За отговорник офис за CAS се дава: RlG LOS Branch Manager RlG LOS Credit Expert RlG LOS Credit Expert 2 RuG LOS Branches + DK9453
+КК в БДСК – изисква се Order attached / достъп „кредитни карти“.
+
+- DIM с ID вземете JD.
+- BW > Admin > Access > Work definitions – по JD търсете DK____.
+- AD проверете FG групи и членовете – вземете модел за LOS групи.
+
+#### Добавете тези групи в АД:
+RLG LOS Credit Expert
+RLG LOS Credit Expert 2
+RuG LOS Branches
+RlG LOS Branch Manager (само мениджъри)
+#### За отговорник офис за CAS се дава: 
+  - RlG LOS Branch Manager 
+  - RlG LOS Credit Expert 
+  - RlG LOS Credit Expert 2 
+  - RuG LOS Branches + DK____
 
 ### Email шаблони
 - Достъпът е предоставен съобразно заеманата длъжност. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.
@@ -339,7 +372,9 @@
 
 #### PR000018
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Access – специални системи и роли
 
@@ -352,7 +387,9 @@
 
 #### PR000019
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Archimed – стъпки
 
@@ -365,7 +402,9 @@
 
 #### PR000020
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## CRM – роли и бележки
 
@@ -378,7 +417,9 @@
 
 #### PR000021
 
----
+--- # close procedure
+
+--- # open procedure
 
 ## Разни бележки / Issues / Notes / Back / DWH / DWHA
 
@@ -390,3 +431,5 @@
 ### Keywords: Notes; Issues; DWH; DWHA; documentation; problems; бележки; проблеми
 
 #### PR000022
+
+--- # close procedure

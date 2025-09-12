@@ -120,7 +120,7 @@ if [[ -n "$first_match" ]]; then
       | "### ✅ Procedure Found: " + .name + " ###\n\n"
         + (
             .sections[]
-            | "Section: " + .name + "\n"
+            | "Section: " + .name + "\n\n"
             + ( .steps | map("- " + .) | join("\n") )
             + "\n"
           )

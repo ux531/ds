@@ -105,8 +105,7 @@
         {
           "name": "keywords: каса; главна; киб; заместване",
           "steps": [
-            "Change JD to PBRYNK6.",
-            "In BankWay:\n  - AL to 50\n  - AC to 9\n  - Confirmation to Yes"
+            "Change Jon definition\n  - In DIM change JD to PBRYNK6\n  - In BankWay:\n  - AL to 50\n  - AC to 9\n  - Confirmation to Yes"
             ]
         }
       ]

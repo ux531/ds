@@ -1,0 +1,539 @@
+{
+    "procedures": [
+        {
+            "name": "New Account (Нов акаунт)",
+            "id": "PR000001",
+            "sections": [
+                {
+                    "steps": [
+                        "- Проверете името на ENG в AD.",
+                        "- Ако има съвпадение на име: обновете Display Name и Full Name, добавяйки суфикс (напр. - Department Name)."
+                    ]
+                },
+                {
+                    "reply": "IDM",
+                    "steps": [
+                        "- IDM > Work Items > Approvals – намерете ID и Approve.",
+                        "- Ако не намирате: изпратете имейл с поръчката (Remedy) до Tsvetelin.Tsvetanov@dskbank.bg.",
+                        "- Ако няма съвпадение в AD: одобрете в IDM > Approve."
+                    ]
+                },
+                {
+                    "reply": "AD конфигурация",
+                    "steps": [
+                        "- Account таб: добавете UID в User Logon Name и задайте домейн @dsk.grp.",
+                        "- Object таб: проверете контейнера за Location."
+                    ]
+                },
+                {
+                    "reply": "IDM – Accounts",
+                    "steps": [
+                        "- Accounts > Find Users – проверете ID."
+                    ]
+                },
+                {
+                    "reply": "Специфика за KIB / SBO / CASHIER TELLER",
+                    "steps": [
+                        "- IDM за KIB: добавете FG CREDITS.",
+                        "- IDM за SBO и CASHIER TELLER: добавете FG Bank Operations.",
+                        "- Job Definition (JD):",
+                        "- SBO: BRSBO010",
+                        "- KIB: BRCRIN07 / (BRCRINK6 за CASH)"
+                    ]
+                },
+                {
+                    "reply": "Общи AD групи",
+                    "steps": [
+                        "- FG Bank Operations",
+                        "- GpG M365 OneDrive",
+                        "- M365 Authentication - Certificates",
+                        "- M365 Licensing - E5"
+                    ]
+                },
+                {
+                    "reply": "Действия",
+                    "steps": [
+                        "- Изберете update AD.",
+                        "- Одобрете в IDM висящото ID."
+                    ]
+                },
+                {
+                    "reply": "AD – добавяне на липсващи M365 групи",
+                    "steps": [
+                        "- M365 Authentication - Certificates",
+                        "- M365 Licensing - E5"
+                    ]
+                },
+                {
+                    "reply": "SUB справки",
+                    "steps": [
+                        "- Файлове:",
+                        "- SUBORDINATION-HO-31.07.2025-sent.xlsx",
+                        "- SUBORDINATION-REGIONS-31.07.2025-sent.xlsb",
+                        "- SUBORDINATION-CFD-31.07.2025-sent.xlsx",
+                        "- Вземете JD от WO и търсете подобни записи в DB по Dep Owner.",
+                        "- Проверете roles в IDM за съответния UID.",
+                        "- Не добавяйте DFS и SAG.",
+                        "- Не добавяйте достъпи в Jira, Confluence, Muvex, WIFI.",
+                        "- Добавете роли на UID според модела.",
+                        "- Потвърдете съвпадения в конзолата."
+                    ]
+                },
+                {
+                    "reply": "Head Office – добавете",
+                    "steps": [
+                        "- GpG M365 OneDrive",
+                        "- M365 Auth Passwordless",
+                        "- M365 Licensing - E5"
+                    ]
+                },
+                {
+                    "reply": "Финализиране",
+                    "steps": [
+                        "- Work Items: Approve за UID.",
+                        "- Проверете M365, ако не е добавено:",
+                        "- M365 Authentication - Passwordless and SSPR",
+                        "- M365 Licensing - E5d"
+                    ]
+                },
+                {
+                    "reply": "Email шаблон",
+                    "steps": [
+                        "- До: ITHO@dskbankbg.mail.onmicrosoft.com; IT.Regions@dskbank.bg",
+                        "- Текст:",
+                        "- Назначена е парола за Dimension и Bankway BW@y1134.",
+                        "- Акаунтът е създаден, назначена е стандартна парола SiLn@Parola132.",
+                        "- Данни: три имена, ID.",
+                        "- Забележка: паролата е автоматична."
+                    ]
+                },
+                {
+                    "keywords": "New Account; Нов акаунт; new user; onboarding; онбординг; нов служител; назначаване",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Reset / Ресет пароли",
+            "id": "PR000002",
+            "sections": [
+                {
+                    "steps": [
+                        "- В AD ресет на паролата и задаване на default.",
+                        "- Формат: SiLn@<timestamp>."
+                    ]
+                },
+                {
+                    "reply": "Email шаблон",
+                    "steps": [
+                        "- Акаунтът е възстановен.",
+                        "- Назначена е нова парола SiLn@Parola1214 за AD, която трябва да се смени след първо влизане.",
+                        "- Паролата се назначава от администратора."
+                    ]
+                },
+                {
+                    "keywords": "Reset; Ресет; password reset; password; парола; акаунт; unlock",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Change / Промяна на длъжност (JD)",
+            "id": "PR000003",
+            "sections": [
+                {
+                    "steps": [
+                        "- Необходима е заповед за преназначаване или Order ID.",
+                        "- Намерете моделния UID и вземете GPO/Groups от него за вашия UID.",
+                        "- В IDM добавете новите groups и проверете обновяване в AD.",
+                        "- В DIM сменете JD.",
+                        "- В BW за UID променете:",
+                        "- Работна дефиниция",
+                        "- Като Служител",
+                        "- Титуляр"
+                    ]
+                },
+                {
+                    "reply": "Email шаблон",
+                    "steps": [
+                        "- Преназначаването е направено, достъпът е предоставен съобразно заеманата длъжност.",
+                        "- Необходимо е Log Off и Log On. Време за репликиране – до 30 мин."
+                    ]
+                },
+                {
+                    "keywords": "Change; Промяна; JD; Job Definition; role change; промяна на длъжност; преназначаване",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Location / Командировка и смяна на локация",
+            "id": "PR000004",
+            "sections": [
+                {
+                    "steps": [
+                        "- В AD променете LG и STG (DL – само при изрично искане).",
+                        "- В DIM меню 1 / 16 – сменете и двата клона."
+                    ]
+                },
+                {
+                    "reply": "Email шаблон",
+                    "steps": [
+                        "- Локационната група е сменена. Време за репликиране – до 30 мин. Нужен е Log Off / Log On."
+                    ]
+                },
+                {
+                    "keywords": "Location; Локация; командировка; месторабота; смена на офис; location change",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Add / Change – Teller",
+            "id": "PR000005",
+            "sections": [
+                {
+                    "steps": [
+                        "- Проверете LG в AD.",
+                        "- В DB намерете destination.",
+                        "- В source таблица добавете запис с ID и NAME.",
+                        "- Ако teller ID е за друг офис, добавете D накрая.",
+                        "- Обновете destination таблица със записа без D.",
+                        "- В BW: Каса на телър → Add teller.",
+                        "- Само за счет. в ЦУ – телър за 0099."
+                    ]
+                },
+                {
+                    "keywords": "Teller; Add; Change; каса; телър; branch teller; банкови операции",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Достъп до SonarQube",
+            "id": "PR000006",
+            "sections": [
+                {
+                    "steps": [
+                        "Моля за пренасочване."
+                    ]
+                },
+                {
+                    "keywords": "Достъп до SonarQube",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Добавяне на имейли в White list",
+            "id": "PR000007",
+            "sections": [
+                {
+                    "steps": [
+                        "Моля за пренасочване."
+                    ]
+                },
+                {
+                    "keywords": "имейлив White list",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Reply / Отговори към заявители",
+            "id": "PR000008",
+            "sections": [
+                {
+                    "reply": "Procedure",
+                    "steps": [
+                        "- Достъпът е предоставен съобразно заеманата длъжност. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.",
+                        "- Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 30 мин.",
+                        "- Достъпът е предоставен. Необходимо е да се разпишете DIMENSION и BANKWAY."
+                    ]
+                },
+                {
+                    "reply": "Teams съобщения",
+                    "steps": [
+                        "- Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 48 часа."
+                    ]
+                },
+                {
+                    "keywords": "Reply; Отговор; шаблон; заявители; email; комуникация; response",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Clavis – достъпи и заместване на мениджър",
+            "id": "PR000009",
+            "sections": [
+                {
+                    "steps": [
+                        "- DIM: проверете ID за Job Definition.",
+                        "- Обновете с нов JD от DB.",
+                        "- В Clavis добавете роли според JD.",
+                        "- Потвърдете в AD и IDM."
+                    ]
+                },
+                {
+                    "keywords": "Clavis; достъп; роли; мениджър; access; JD",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Начални пари на каса (КИБ)",
+            "id": "PR000010",
+            "sections": [
+                {
+                    "steps": [
+                        "- В DIM проверете ID на служител и вземете текущата JD и я запишете.",
+                        "- Сменете текущате JD със 12345678",
+                        "- Върнете старата JD на служителя."
+                    ]
+                },
+                {
+                    "keywords": "начални пари; пари на каса; изравняване на каса",
+                    "steps": []
+                },
+                {
+                    "reply": "Procedure",
+                    "steps": [
+                        "- Достъпът е предоставен. Необходимо е Log Off и Log On. Имате 30 минути да изравните касата. След изравняване на касата се обадете за възстановяване на вашият достъп.",
+                        "- Вашият достъп е възстановен. Необходимо е Log Off и Log On."
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Bulpost – заявка за достъп",
+            "id": "PR000011",
+            "sections": [
+                {
+                    "steps": [
+                        "- Изпратете имейл с поръчката.",
+                        "- Одобрете в IDM.",
+                        "- Потвърдете в AD."
+                    ]
+                },
+                {
+                    "keywords": "Bulpost; достъп; заявка; access request; IDM; AD",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Отказан достъп – шаблон",
+            "id": "PR000012",
+            "sections": [
+                {
+                    "steps": [
+                        "- Изпратете имейл на заявителя.",
+                        "- Обяснете причината.",
+                        "- Добавете ID на поръчката."
+                    ]
+                },
+                {
+                    "keywords": "Denied; отказ; access denied; шаблон; email",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Одобрение – шаблон за имейл",
+            "id": "PR000013",
+            "sections": [
+                {
+                    "steps": [
+                        "- Потвърдете одобрението.",
+                        "- Добавете ID.",
+                        "- Изпратете имейл към IT отдел."
+                    ]
+                },
+                {
+                    "keywords": "Approval; одобрение; template; email; IDM",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "След майчинство / двугодишен отпуск",
+            "id": "PR000014",
+            "sections": [
+                {
+                    "steps": [
+                        "- Проверете AD.",
+                        "- Създайте нов акаунт или обновете съществуващ.",
+                        "- Потвърдете JD и групи."
+                    ]
+                },
+                {
+                    "keywords": "Maternity; отпуск; майчинство; return; акаунт; AD",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Инциденти – шаблон",
+            "id": "PR000015",
+            "sections": [
+                {
+                    "steps": [
+                        "- Отворете тикет в Remedy.",
+                        "- Прикрепете информация за UID.",
+                        "- Следвайте стъпките за разрешаване."
+                    ]
+                },
+                {
+                    "keywords": "Incidents; инциденти; Remedy; тикет; UID; troubleshooting",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Offboarding accounts",
+            "id": "PR000016",
+            "sections": [
+                {
+                    "steps": [
+                        "- Disable UID в AD.",
+                        "- Remove access от DIM и Bankway.",
+                        "- Обновете групи."
+                    ]
+                },
+                {
+                    "keywords": "Offboarding; акаунт; деактивация; UID; access removal",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Add to Bankway & Dimension",
+            "id": "PR000017",
+            "sections": [
+                {
+                    "steps": [
+                        "- Добавете UID към Bankway.",
+                        "- Обновете DIM с роли.",
+                        "- Потвърдете access."
+                    ]
+                },
+                {
+                    "keywords": "Bankway; Dimension; add; UID; access; roles",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "DK / LOS groups (Кредитни карти – CAS)",
+            "id": "PR000018",
+            "sections": [
+                {
+                    "steps": [
+                        "КК в БДСК – изисква се Order attached / достъп „кредитни карти“.",
+                        "- DIM с ID вземете JD.",
+                        "- BW > Admin > Access > Work definitions – по JD търсете DK____.",
+                        "- AD проверете FG групи и членовете – вземете модел за LOS групи."
+                    ]
+                },
+                {
+                    "reply": "# Добавете тези групи в АД:",
+                    "steps": [
+                        "RLG LOS Credit Expert",
+                        "RLG LOS Credit Expert 2",
+                        "RuG LOS Branches",
+                        "RlG LOS Branch Manager (само мениджъри)"
+                    ]
+                },
+                {
+                    "reply": "# За отговорник офис за CAS се дава:",
+                    "steps": [
+                        "- RlG LOS Branch Manager",
+                        "- RlG LOS Credit Expert",
+                        "- RlG LOS Credit Expert 2",
+                        "- RuG LOS Branches + DK____"
+                    ]
+                },
+                {
+                    "reply": "Email шаблони",
+                    "steps": [
+                        "- Достъпът е предоставен съобразно заеманата длъжност. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.",
+                        "- Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин."
+                    ]
+                },
+                {
+                    "keywords": "DK; LOS; groups; Кредитни карти; CAS; access; достъп; AD; IDM",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Access – специални системи и роли",
+            "id": "PR000019",
+            "sections": [
+                {
+                    "steps": [
+                        "- В IDM проверете роли.",
+                        "- В AD добавете или премахнете групи.",
+                        "- Потвърдете access."
+                    ]
+                },
+                {
+                    "keywords": "Access; специални системи; роли; IDM; AD; access control",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Archimed – стъпки",
+            "id": "PR000020",
+            "sections": [
+                {
+                    "steps": [
+                        "- Създайте акаунт.",
+                        "- Присвоете роли.",
+                        "- Потвърдете access в AD."
+                    ]
+                },
+                {
+                    "keywords": "Archimed; достъп; роли; account; AD; procedure",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "CRM – роли и бележки",
+            "id": "PR000021",
+            "sections": [
+                {
+                    "steps": [
+                        "- Проверете CRM акаунт.",
+                        "- Добавете роли и бележки.",
+                        "- Потвърдете с мениджъра."
+                    ]
+                },
+                {
+                    "keywords": "CRM; роли; бележки; account; access; управление",
+                    "steps": []
+                }
+            ]
+        },
+        {
+            "name": "Разни бележки / Issues / Notes / Back / DWH / DWHA",
+            "id": "PR000022",
+            "sections": [
+                {
+                    "steps": [
+                        "- Документирайте проблеми.",
+                        "- Обновете DWH/DWHA.",
+                        "- Потвърдете със съответния отдел."
+                    ]
+                },
+                {
+                    "keywords": "Notes; Issues; DWH; DWHA; documentation; problems; бележки; проблеми",
+                    "steps": []
+                }
+            ]
+        }
+    ]
+}
