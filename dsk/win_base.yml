@@ -2,22 +2,12 @@ matches:
   - trigger: "///"
     replace: "{{output}}"
     vars:
-      - name: clipboard_content
-        type: clipboard
       - name: output
         type: shell
         params:
           cmd: |
-            # Normalize the clipboard content for searching
-            KEYWORD="$(echo "{{clipboard_content}}" | tr '[:upper:]' '[:lower:]' | tr -d '\r' | xargs)"
+            pwsh -NoProfile -ExecutionPolicy Bypass -File "index.ps1"
 
-            PROC_FILE_PATH="/Users/shade/Downloads/DSK/dsk/procedures.json"
-
-            if [ -z "$KEYWORD" ]; then
-              echo "Error: No keyword found in clipboard.";
-            else
-              jq -r '.procedures[] | select(.name | test("{{clipboard_content}}"; "i") or (.keywords? | test("{{clipboard_content}}"; "i"))) | .sections[] | select(.steps != null) | .steps[] | if type == "string" then . else (.title + "\n" + (.steps | join("\n"))) end' "${PROC_FILE_PATH}" || echo "Error: No matching procedure found for {{clipboard_content}}. JSON exists=$( [ -f ${PROC_FILE_PATH} ] && echo yes || echo no )"
-            fi
 
   - trigger: "./re"
     replace: "{{selected_reply.id}}"
@@ -58,14 +48,6 @@ matches:
         params:
           sort: false
           values:
-            - id: "/Users/shade/Library/Application Support/espanso"
-              label: "Source"
-            - id: "https://www.google.com"
-              label: "Google"
-            - id: "https://www.youtube.com"
-              label: "YouTube"
-            - id: "https://translate.google.com"
-              label: "Translate"
             - id: "https://dskbank.bg/"
               label: "DSK Help Desk"
       - name: exec
@@ -121,3 +103,69 @@ matches:
       Reply message  
        
       --- <
+
+  - trigger: "./kib"
+    markdown: | 
+      ### КИБ 
+
+        Начални пари (Initial float):             
+        DIM:JD  BRUCRBK9
+
+        КИБ с Каса (Teller with Cash Desk):             
+        BW: SBRYNK6; BW AL-10_______AC-0_______N
+
+        Главна Каса (Main Cash Desk):             
+        BW: GBRYNK6; BW AL-50_______AC-9_______Y
+
+        КИБ без Каса (Teller without Cash):             
+        DIM: SBRYNB7;
+
+        Swift Bisera Operator:             
+        DIM: SCRiCK6;
+
+
+      ### СБО (Specialized Operations)
+
+        СБО с Каса:             
+        DIM: CRCRNB
+
+# KIB Accounts HELP
+
+  - trigger: "./kh"
+    markdown: | 
+        ### КИБ 
+        
+          📘 Legend of Job Definition Codes
+
+          Each DIM code and attributes describe branch roles, cash operations, and system permissions.
+
+          DIM Code Structure
+
+          [PREFIX][ENTITY][ROLE][SUFFIX]
+
+          PREFIX
+          - S → Standard Branch role
+          - G → General/Head Office role
+          - C → Centralized/Shared Service role
+          - B → Back-office role
+
+          ENTITY
+          - BRU → Branch User
+          - BRYN → Branch Y/N (branch-level operations)
+          - CRCR → Central Cash & Retail
+          - SCRi → Swift Clearing Integration
+
+          ROLE SUFFIX
+          - K6 → Cash Desk Teller
+          - K7 → No-Cash Teller (digital/operations only)
+          - B6/B7 → Back-office Teller (cash or no-cash depending on digit)
+          - C → Clearing/Settlement
+          - i → International/Swift
+
+
+          Permission Attributes (BankWay system)
+
+          - BW → BankWay software in use
+          - AL-xx → Access Level (0–50, higher = more privileged)
+          - AC-x → Access Control (0–9, finer-grained restriction)
+          - Y/N → Yes/No flag (e.g., Cash enabled, Module enabled)
