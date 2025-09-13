@@ -1,62 +1,58 @@
---- # open procedure
+--- >
 
-## New Account (Нов акаунт)
+## [pn] New Account (Нов акаунт)
+### [kw] Keywords: New Account; Нов акаунт; new user; onboarding; онбординг; нов служител; назначаване
+#### [id] PR000001
 
-### Procedure
+### [pr] Procedure
 - Проверете името на ENG в AD.
 - Ако има съвпадение на име: обновете Display Name и Full Name, добавяйки суфикс (напр. - Department Name).
-
-### IDM
 - IDM > Work Items > Approvals – намерете ID и Approve.
 - Ако не намирате: изпратете имейл с поръчката (Remedy) до Tsvetelin.Tsvetanov@dskbank.bg.
 - Ако няма съвпадение в AD: одобрете в IDM > Approve.
 
-### AD конфигурация
+### [ext] AD конфигурация
 - Account таб: добавете UID в User Logon Name и задайте домейн @dsk.grp.
 - Object таб: проверете контейнера за Location.
 
-### IDM – Accounts
+### [ext] IDM – Accounts
 - Accounts > Find Users – проверете ID.
 
-### Специфика за KIB / SBO / CASHIER TELLER
+### [ext] Специфика за KIB / SBO / CASHIER TELLER
 - IDM за KIB: добавете FG CREDITS.
 - IDM за SBO и CASHIER TELLER: добавете FG Bank Operations.
 - Job Definition (JD):
   - SBO: BRSBO010
   - KIB: BRCRIN07 / (BRCRINK6 за CASH)
 
-### Общи AD групи
+### [ext] Общи AD групи
 - FG Bank Operations
 - GpG M365 OneDrive
 - M365 Authentication - Certificates
 - M365 Licensing - E5
 
-### Действия
+### [ext] Действия
 - Изберете update AD.
 - Одобрете в IDM висящото ID.
 
-### AD – добавяне на липсващи M365 групи
+### [ext] AD – добавяне на липсващи M365 групи
 - M365 Authentication - Certificates
 - M365 Licensing - E5
 
-### SUB справки
+### [ext] SUB справки
 - Файлове:
-  - SUBORDINATION-HO-31.07.2025-sent.xlsx
-  - SUBORDINATION-REGIONS-31.07.2025-sent.xlsb
-  - SUBORDINATION-CFD-31.07.2025-sent.xlsx
-- Вземете JD от WO и търсете подобни записи в DB по Dep Owner.
+- Проверете последните файлове за Субординация
 - Проверете roles в IDM за съответния UID.
-- Не добавяйте DFS и SAG.
-- Не добавяйте достъпи в Jira, Confluence, Muvex, WIFI.
+- Не добавяйте DFS, SAG, Jira, Confluence, Muvex, WIFI
 - Добавете роли на UID според модела.
 - Потвърдете съвпадения в конзолата.
 
-### Head Office – добавете
+### [ext] Head Office – добавете
 - GpG M365 OneDrive
 - M365 Auth Passwordless
 - M365 Licensing - E5
 
-### Финализиране
+### [ext] Финализиране
 - Work Items: Approve за UID.
 - Проверете M365, ако не е добавено:
   - M365 Authentication - Passwordless and SSPR
@@ -70,17 +66,15 @@
   - Данни: три имена, ID.
   - Забележка: паролата е автоматична.
 
-### Keywords: New Account; Нов акаунт; new user; onboarding; онбординг; нов служител; назначаване
+--- <
 
-#### PR000001
+--- >
 
---- # close procedure
+## [pn] Reset / Ресет пароли
+### [kw] Keywords: Reset; Ресет; password reset; password; парола; акаунт; unlock
+#### [id] R000002
 
---- # open procedure
-
-## Reset / Ресет пароли
-
-### Procedure
+### [pr] Procedure
 - В AD ресет на паролата и задаване на default.
 - Формат: SiLn@<timestamp>.
 
@@ -89,17 +83,15 @@
 - Назначена е нова парола SiLn@Parola1214 за AD, която трябва да се смени след първо влизане.
 - Паролата се назначава от администратора.
 
-### Keywords: Reset; Ресет; password reset; password; парола; акаунт; unlock
+--- <
 
-#### PR000002
+--- >
 
---- # close procedure
+## [pn] Change / Промяна на длъжност (JD)
+### [kw] Keywords: Change; Промяна; JD; Job Definition; role change; промяна на длъжност; преназначаване
+#### [id] PR000003
 
---- # open procedure
-
-## Change / Промяна на длъжност (JD)
-
-### Procedure
+### [pr] Procedure
 - Необходима е заповед за преназначаване или Order ID.
 - Намерете моделния UID и вземете GPO/Groups от него за вашия UID.
 - В IDM добавете новите groups и проверете обновяване в AD.
@@ -113,34 +105,30 @@
 - Преназначаването е направено, достъпът е предоставен съобразно заеманата длъжност.
 - Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.
 
-### Keywords: Change; Промяна; JD; Job Definition; role change; промяна на длъжност; преназначаване
+--- <
 
-#### PR000003
+--- >
 
---- # close procedure
+## [pn] Location / Командировка и смяна на локация
+### [kw] Keywords: Location; Локация; командировка; месторабота; смена на офис; location change
+#### [id] PR000004
 
---- # open procedure
-
-## Location / Командировка и смяна на локация
-
-### Procedure
+### [pr] Procedure
 - В AD променете LG и STG (DL – само при изрично искане).
 - В DIM меню 1 / 16 – сменете и двата клона.
 
 ### [re] Email шаблон
 - Локационната група е сменена. Време за репликиране – до 30 мин. Нужен е Log Off / Log On.
 
-### Keywords: Location; Локация; командировка; месторабота; смена на офис; location change
+--- <
 
-#### PR000004
+--- >
 
---- # close procedure
+## [pn] Add / Change – Teller
+### [kw] Keywords: Teller; Add; Change; каса; телър; branch teller; банкови операции
+#### [id] PR000005
 
---- # open procedure
-
-## Add / Change – Teller
-
-### Procedure
+### [pr] Procedure
 - Проверете LG в AD.
 - В DB намерете destination.
 - В source таблица добавете запис с ID и NAME.
@@ -149,287 +137,185 @@
 - В BW: Каса на телър → Add teller.
 - Само за счет. в ЦУ – телър за 0099.
 
-### Keywords: Teller; Add; Change; каса; телър; branch teller; банкови операции
+--- <
 
-#### PR000005
+--- >
 
---- # close procedure
+## [pn] Достъп до: SonarQube, White list
+### [kw] Keywords: Достъп до SonarQube; White list; Bulpost
+#### [id] PR000006
 
---- # open procedure
+### [pr] Procedure
+- Моля за пренасочване.
 
-## Достъп до SonarQube
+--- <
 
-### Procedure
-Моля за пренасочване.
+--- >
 
-### Keywords: Достъп до SonarQube
-
-#### PR000006
-
---- # close procedure
-
---- # open procedure
-
-## Добавяне на имейли в White list
-
-### Procedure
-Моля за пренасочване.
-
-### Keywords: имейлив White list
-
-#### PR000007
-
---- # close procedure
-
---- # open procedure
-
-## Reply / Отговори към заявители
+## [pn] Reply / Отговори към заявители
+### [kw] Keywords: Reply; Отговор; шаблон; заявители; email; комуникация; response
+#### [id] PR000008
 
 ### [re] Procedure
 - Достъпът е предоставен съобразно заеманата длъжност. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.
 - Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 30 мин.
 - Достъпът е предоставен. Необходимо е да се разпишете DIMENSION и BANKWAY.
 
-### Teams съобщения
+### [ext] Teams съобщения
 - Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 48 часа.
 
-### Keywords: Reply; Отговор; шаблон; заявители; email; комуникация; response
+--- <
 
-#### PR000008
+--- >
 
---- # close procedure
+## [pn] Clavis – достъпи и заместване на мениджър
+### [kw] Keywords: Clavis; достъп; роли; мениджър; access; JD
+#### [id] PR000009
 
---- # open procedure
-
-## Clavis – достъпи и заместване на мениджър
-
-### Procedure
+### [pr] Procedure
 - DIM: проверете ID за Job Definition.
 - Обновете с нов JD от DB.
 - В Clavis добавете роли според JD.
 - Потвърдете в AD и IDM.
 
-### Keywords: Clavis; достъп; роли; мениджър; access; JD
+--- <
 
-#### PR000009
+--- >
 
---- # close procedure
+## [pn] Начални пари на каса (КИБ)
+### [kw] Keywords: начални пари; пари на каса; изравняване на каса
+#### [id] PR000010
 
---- # open procedure
-
-## Начални пари на каса (КИБ)
-
-### Procedure
-
+### [pr] Procedure
 - В DIM проверете ID на служител и вземете текущата JD и я запишете.
 - Сменете текущате JD със 12345678
 - Върнете старата JD на служителя.
 
-### Keywords: начални пари; пари на каса; изравняване на каса
-
-## Reply / Отговори към заявители
-
 ### [re] Procedure
-- Достъпът е предоставен. Необходимо е Log Off и Log On. Имате 30 минути да изравните касата. След изравняване на касата се обадете за възстановяване на вашият достъп.
-- Вашият достъп е възстановен. Необходимо е Log Off и Log On.
+Достъпът е предоставен. Необходимо е Log Off и Log On. Имате 30 минути да изравните касата. След изравняване на касата се обадете за възстановяване на вашият достъп.
 
-#### PR000010
+Вашият достъп е възстановен. Необходимо е Log Off и Log On.
 
---- # close procedure
+--- <
 
---- # open procedure
+--- >
 
-## Bulpost – заявка за достъп
+## [pn] След майчинство / двугодишен отпуск
+### [kw] Keywords: Maternity; отпуск; майчинство; return; акаунт; AD
+#### [id] PR000014
 
-### Procedure
-- Изпратете имейл с поръчката.
-- Одобрете в IDM.
-- Потвърдете в AD.
-
-### Keywords: Bulpost; достъп; заявка; access request; IDM; AD
-
-#### PR000011
-
---- # close procedure
-
---- # open procedure
-
-## Отказан достъп – шаблон
-
-### Procedure
-- Изпратете имейл на заявителя.
-- Обяснете причината.
-- Добавете ID на поръчката.
-
-### Keywords: Denied; отказ; access denied; шаблон; email
-
-#### PR000012
-
---- # close procedure
-
---- # open procedure
-
-## Одобрение – шаблон за имейл
-
-### Procedure
-- Потвърдете одобрението.
-- Добавете ID.
-- Изпратете имейл към IT отдел.
-
-### Keywords: Approval; одобрение; template; email; IDM
-
-#### PR000013
-
---- # close procedure
-
---- # open procedure
-
-## След майчинство / двугодишен отпуск
-
-### Procedure
+### [pr] Procedure
 - Проверете AD.
 - Създайте нов акаунт или обновете съществуващ.
 - Потвърдете JD и групи.
 
-### Keywords: Maternity; отпуск; майчинство; return; акаунт; AD
+--- <
 
-#### PR000014
+--- >
 
---- # close procedure
+## [pn] Инциденти – шаблон
+### [kw] Keywords: Incidents; инциденти; Remedy; тикет; UID; troubleshooting
+#### [id] PR000015
 
---- # open procedure
-
-## Инциденти – шаблон
-
-### Procedure
+### [pr] Procedure
 - Отворете тикет в Remedy.
 - Прикрепете информация за UID.
 - Следвайте стъпките за разрешаване.
 
-### Keywords: Incidents; инциденти; Remedy; тикет; UID; troubleshooting
+--- <
 
-#### PR000015
+--- >
 
---- # close procedure
+## [pn] Offboarding accounts
+### [kw] Keywords: Offboarding; акаунт; деактивация; UID; access removal
+#### [id] PR000016
 
---- # open procedure
+### [pr] Procedure
+- AD: Disable account.
+- IDM: Remove access от DIM и Bankway.
+- Ако има м365 групи в АД се премахват.
+- Ако има телър се обозначавава в базата със D
 
-## Offboarding accounts
+--- <
 
-### Procedure
-- Disable UID в AD.
-- Remove access от DIM и Bankway.
-- Обновете групи.
+--- >
 
-### Keywords: Offboarding; акаунт; деактивация; UID; access removal
+## [pn] Add to Bankway & Dimension
+### [kw] Keywords: Bankway; Dimension; add; UID; access; roles
+#### [id] PR000017
 
-#### PR000016
-
---- # close procedure
-
---- # open procedure
-
-## Add to Bankway & Dimension
-
-### Procedure
+### [pr] Procedure
 - Добавете UID към Bankway.
 - Обновете DIM с роли.
 - Потвърдете access.
 
-### Keywords: Bankway; Dimension; add; UID; access; roles
+--- <
 
-#### PR000017
+--- >
 
---- # close procedure
+## [pn] DK / LOS groups (Кредитни карти – CAS)
+### [kw] Keywords: DK; LOS; groups; Кредитни карти; CAS
+#### [id] PR000018
 
---- # open procedure
-
-## DK / LOS groups (Кредитни карти – CAS)
-
-### Procedure
-КК в БДСК – изисква се Order attached / достъп „кредитни карти“.
-
+### [pr] Procedure
+- КК в БДСК – изисква се Order attached / достъп „кредитни карти“.
 - DIM с ID вземете JD.
 - BW > Admin > Access > Work definitions – по JD търсете DK____.
 - AD проверете FG групи и членовете – вземете модел за LOS групи.
 
-#### Добавете тези групи в АД:
-RLG LOS Credit Expert
-RLG LOS Credit Expert 2
-RuG LOS Branches
-RlG LOS Branch Manager (само мениджъри)
-#### За отговорник офис за CAS се дава: 
-  - RlG LOS Branch Manager 
-  - RlG LOS Credit Expert 
-  - RlG LOS Credit Expert 2 
-  - RuG LOS Branches + DK____
+### [ext] Добавете тези групи в АД
+- RLG LOS Credit Expert
+- RLG LOS Credit Expert 2
+- RuG LOS Branches
+- RlG LOS Branch Manager (само мениджъри)
 
-### Email шаблони
+### [ext] За отговорник офис за CAS се дава
+- RlG LOS Branch Manager 
+- RlG LOS Credit Expert 
+- RlG LOS Credit Expert 2 
+- RuG LOS Branches + DK____
+
+### [re] Email шаблони
 - Достъпът е предоставен съобразно заеманата длъжност. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.
 - Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – до 30 мин.
 
-### Keywords: DK; LOS; groups; Кредитни карти; CAS; access; достъп; AD; IDM
+--- <
 
-#### PR000018
+--- >
 
---- # close procedure
+## [pn] Archimed – стъпки
+### [kw] Keywords: Archimed; достъп; добавяне; преместване; нов акаунт
+#### [id] PR000020
 
---- # open procedure
-
-## Access – специални системи и роли
-
-### Procedure
-- В IDM проверете роли.
-- В AD добавете или премахнете групи.
-- Потвърдете access.
-
-### Keywords: Access; специални системи; роли; IDM; AD; access control
-
-#### PR000019
-
---- # close procedure
-
---- # open procedure
-
-## Archimed – стъпки
-
-### Procedure
+### [pr] Procedure
 - Създайте акаунт.
 - Присвоете роли.
 - Потвърдете access в AD.
 
-### Keywords: Archimed; достъп; роли; account; AD; procedure
+--- <
 
-#### PR000020
+--- >
 
---- # close procedure
+## [pn] CRM 
+### [kw] Keywords: CRM; роли
+#### [id] PR000021
 
---- # open procedure
-
-## CRM – роли и бележки
-
-### Procedure
+### [pr] Procedure
 - Проверете CRM акаунт.
 - Добавете роли и бележки.
 - Потвърдете с мениджъра.
 
-### Keywords: CRM; роли; бележки; account; access; управление
+--- <
 
-#### PR000021
+--- >
 
---- # close procedure
+## [pn] Разни бележки / Issues / Notes / Back / DWH / DWHA
+### [kw] Keywords: Notes; Issues; DWH; DWHA; documentation; problems; бележки; проблеми
+#### [id] PR000022
 
---- # open procedure
-
-## Разни бележки / Issues / Notes / Back / DWH / DWHA
-
-### Procedure
+### [pr] Procedure
 - Документирайте проблеми.
 - Обновете DWH/DWHA.
 - Потвърдете със съответния отдел.
 
-### Keywords: Notes; Issues; DWH; DWHA; documentation; problems; бележки; проблеми
-
-#### PR000022
-
---- # close procedure
+--- <

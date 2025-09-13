@@ -3,8 +3,8 @@
 # DESCRIPTION:
 # Searches inside procedures.json for the best matching procedures based on
 # keywords, section reply fields, and step text. Supports Unicode input (Cyrillic + English).
+# Excludes [re] sections from scoring.
 # Shows the top 3 candidates and allows the user to view the top candidate's full procedure.
-# Preserves original step formatting, including leading - where present.
 # ==============================================================================
 
 # --- Encoding Fix ---
@@ -47,23 +47,20 @@ foreach ($proc in $json.procedures) {
     $score = 0
     $matched = @()
 
-    # --- Collect keywords from all sections ---
+    # --- Collect keywords (high weight) ---
     $keywords = @()
-    if ($proc.sections) {
-        foreach ($section in $proc.sections) {
-            if ($section.PSObject.Properties.Name -contains 'keywords' -and $section.keywords) {
-                $keywords += ($section.keywords -split ';')
-            }
-        }
+    if ($proc.PSObject.Properties.Name -contains 'keywords' -and $proc.keywords) {
+        $keywords += ($proc.keywords -split ';')
     }
 
-    # --- Collect searchable fields ---
+    # --- Collect searchable fields excluding [re] sections ---
     $fields = @($proc.name)
     if ($proc.sections) {
         foreach ($section in $proc.sections) {
-            if ($section.PSObject.Properties.Name -contains 'reply' -and $section.reply) {
-                $fields += $section.reply
-            }
+
+            # Skip [re] sections from scoring
+            if ($section.PSObject.Properties.Name -contains 'reply') { continue }
+
             foreach ($step in $section.steps) {
                 if ($step -is [string]) {
                     $fields += $step
@@ -78,6 +75,7 @@ foreach ($proc in $json.procedures) {
     # --- Matching ---
     foreach ($w in $words) {
         $wNorm = $w.ToLowerInvariant()
+
         # Keyword matches (high weight)
         foreach ($k in $keywords) {
             $kNorm = $k.ToLowerInvariant()
@@ -86,6 +84,7 @@ foreach ($proc in $json.procedures) {
                 $matched += $w
             }
         }
+
         # Field matches (low weight)
         foreach ($f in $fields) {
             if ($f -is [string] -and $f) {
@@ -116,6 +115,7 @@ foreach ($proc in $json.procedures) {
     }
 }
 
+# --- Sort Top Candidates ---
 $results = $results | Sort-Object Score -Descending | Select-Object -First 3
 if (-not $results) {
     Write-Host "❌ No matching procedures found."
@@ -146,27 +146,20 @@ if ($first_match) {
             $sectionLabel = if ($section.PSObject.Properties.Name -contains 'reply') { $section.reply -replace '^# ', '' }
                            elseif ($section.PSObject.Properties.Name -contains 'keywords') { "Keywords" }
                            else { "Procedure" }
+
             Write-Host "Section: $sectionLabel"
-            $isSublist = $section.PSObject.Properties.Name -contains 'reply' -and $section.reply -match '^# '
-            if ($isSublist) {
-                # Treat as sublist under Procedure
-                Write-Host "  $sectionLabel"
-                foreach ($step in $section.steps) {
-                    Write-Host "    $step"
-                }
-            } else {
-                foreach ($step in $section.steps) {
-                    if ($step -is [string]) {
-                        Write-Host "$step"
-                    } elseif ($step.PSObject.Properties.Name -contains 'title') {
-                        Write-Host "  $($step.title)"
-                        foreach ($substep in $step.steps) {
-                            if ($substep -is [string]) {
-                                Write-Host "    $substep"
-                            } elseif ($substep -is [array]) {
-                                foreach ($nestedStep in $substep) {
-                                    Write-Host "      $nestedStep"
-                                }
+
+            foreach ($step in $section.steps) {
+                if ($step -is [string]) {
+                    Write-Host "$step"
+                } elseif ($step.PSObject.Properties.Name -contains 'title') {
+                    Write-Host "  $($step.title)"
+                    foreach ($substep in $step.steps) {
+                        if ($substep -is [string]) {
+                            Write-Host "    $substep"
+                        } elseif ($substep -is [array]) {
+                            foreach ($nestedStep in $substep) {
+                                Write-Host "      $nestedStep"
                             }
                         }
                     }
@@ -184,5 +177,5 @@ if ($first_match) {
 # - Console output forced to UTF-8
 # - Search uses ToLowerInvariant() + -like for matching
 # - Preserves original step formatting, including leading - where present
-# - Handles reply sections starting with # as sublists under Procedure
+# - [re] sections ignored for scoring
 # ==============================================================================
