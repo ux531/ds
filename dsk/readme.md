@@ -1,5 +1,3 @@
-
-```markdown
 # DSK Procedures Parser & Search Tool
 
 ## Overview
