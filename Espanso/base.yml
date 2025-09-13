@@ -1,0 +1,123 @@
+matches:
+  - trigger: "///"
+    replace: "{{output}}"
+    vars:
+      - name: clipboard_content
+        type: clipboard
+      - name: output
+        type: shell
+        params:
+          cmd: |
+            # Normalize the clipboard content for searching
+            KEYWORD="$(echo "{{clipboard_content}}" | tr '[:upper:]' '[:lower:]' | tr -d '\r' | xargs)"
+
+            PROC_FILE_PATH="/Users/shade/Downloads/DSK/dsk/procedures.json"
+
+            if [ -z "$KEYWORD" ]; then
+              echo "Error: No keyword found in clipboard.";
+            else
+              jq -r '.procedures[] | select(.name | test("{{clipboard_content}}"; "i") or (.keywords? | test("{{clipboard_content}}"; "i"))) | .sections[] | select(.steps != null) | .steps[] | if type == "string" then . else (.title + "\n" + (.steps | join("\n"))) end' "${PROC_FILE_PATH}" || echo "Error: No matching procedure found for {{clipboard_content}}. JSON exists=$( [ -f ${PROC_FILE_PATH} ] && echo yes || echo no )"
+            fi
+
+  - trigger: "./re"
+    replace: "{{selected_reply.id}}"
+    vars:
+      - name: selected_reply
+        type: choice
+        params:
+          values:
+            - id: "The group was changed successfully. Please log off and log on for the changes to take effect. Replication time: 30 minutes."
+              label: "Group changed"
+            - id: "The group was reverted successfully. Please log off and log on for the changes to take effect. Replication time: 30 minutes."
+              label: "Group reverted"
+            - id: "You do not have permission to perform this action. Please contact the administrator."
+              label: "No permission"
+            - id: "You’ve been added to the groups successfully. Please log off and log on for the changes to take effect. Replication time: 30 minutes."
+              label: "Added to groups"
+            - id: "You’ve been removed from the groups. Please log off and log on for the changes to take effect. Replication time: 30 minutes."
+              label: "Removed from groups"
+            - id: "Your Active Directory password has been reset! The new password is: SiLNp@132. Please log off and log on for the changes to take effect."
+              label: "AD password reset"
+            - id: "Please forward to Desktop Administrators."
+              label: "Forward"
+            - id: "Достъпът е предоставен. Необходимо е Log Off и Log On. Имате 30 минути да изравните касата. След изравняване на касата се обадете за възстановяване на вашият достъп."
+              label: "Cash 1"
+            - id: "Вашият достъп е възстановен. Необходимо е Log Off и Log On."
+              label: "Cash 2"    
+
+
+              
+
+
+
+  - trigger: "./links"
+    replace: "{{exec}}"
+    vars:
+      - name: selected_url  # << This is the variable name
+        type: choice
+        params:
+          sort: false
+          values:
+            - id: "/Users/shade/Library/Application Support/espanso"
+              label: "Source"
+            - id: "https://www.google.com"
+              label: "Google"
+            - id: "https://www.youtube.com"
+              label: "YouTube"
+            - id: "https://translate.google.com"
+              label: "Translate"
+            - id: "https://dskbank.bg/"
+              label: "DSK Help Desk"
+      - name: exec
+        type: shell
+        params:
+          cmd: "open '{{selected_url.id}}'" # << It must match here
+
+  - trigger: "./cash"
+    replace: "{{hourminute}}  ID:           FJD:           TJD:BRUCRBK9;"
+
+    vars:
+    - name: hourminute
+      type: date
+      params:
+        format: "%d/%m/%Y: %H:%M"
+
+    # Dimension - Reset Password
+
+  - trigger: "./dim"
+    replace: "Your Dimension/BankWay password has been reset! The new password is: Bw@Y2k{{hourminute}}. Please log off and log on for the changes to take effect."
+    vars:
+      - name: hourminute
+        type: date
+        params:
+          format: "%H%M"
+
+  # AD get user details
+
+  - trigger: "./adu"
+    replace: "Get-User -Identity '$|$' | Select-Object -Property SamAccountName, EmailAddress, Title, Department, Manager, Enabled, LastLogonDate, ipphone"
+
+  # AD search description
+
+  - trigger: "./ads"
+    replace: "Get-ADGroup -Filter ' Description -like '*$|$*' ' -Properties Name, Description, GroupScope"
+
+# Blank template for MD
+
+  - trigger: "./pro"
+    replace: |-
+      --- >
+
+      ## [pn] Name
+      ### [kw] Keywords: one; two
+      #### [id] PR000009
+
+      ### [pr] Procedure
+      - line
+      - line
+      - line
+
+      ### [re] Email шаблони
+      Reply message  
+       
+      --- <
