@@ -15,21 +15,18 @@
                     ]
                 },
                 {
-                    "ext": "AD конфигурация",
-                    "steps": [
+                    "extra": [
                         "- Account таб: добавете UID в User Logon Name и задайте домейн @dsk.grp.",
                         "- Object таб: проверете контейнера за Location."
                     ]
                 },
                 {
-                    "ext": "IDM – Accounts",
-                    "steps": [
+                    "extra": [
                         "- Accounts > Find Users – проверете ID."
                     ]
                 },
                 {
-                    "ext": "Специфика за KIB / SBO / CASHIER TELLER",
-                    "steps": [
+                    "extra": [
                         "- IDM за KIB: добавете FG CREDITS.",
                         "- IDM за SBO и CASHIER TELLER: добавете FG Bank Operations.",
                         "- Job Definition (JD):",
@@ -38,8 +35,7 @@
                     ]
                 },
                 {
-                    "ext": "Общи AD групи",
-                    "steps": [
+                    "extra": [
                         "- FG Bank Operations",
                         "- GpG M365 OneDrive",
                         "- M365 Authentication - Certificates",
@@ -47,22 +43,19 @@
                     ]
                 },
                 {
-                    "ext": "Действия",
-                    "steps": [
+                    "extra": [
                         "- Изберете update AD.",
                         "- Одобрете в IDM висящото ID."
                     ]
                 },
                 {
-                    "ext": "AD – добавяне на липсващи M365 групи",
-                    "steps": [
+                    "extra": [
                         "- M365 Authentication - Certificates",
                         "- M365 Licensing - E5"
                     ]
                 },
                 {
-                    "ext": "SUB справки",
-                    "steps": [
+                    "extra": [
                         "- Файлове:",
                         "- Проверете последните файлове за Субординация",
                         "- Проверете roles в IDM за съответния UID.",
@@ -72,16 +65,14 @@
                     ]
                 },
                 {
-                    "ext": "Head Office – добавете",
-                    "steps": [
+                    "extra": [
                         "- GpG M365 OneDrive",
                         "- M365 Auth Passwordless",
                         "- M365 Licensing - E5"
                     ]
                 },
                 {
-                    "ext": "Финализиране",
-                    "steps": [
+                    "extra": [
                         "- Work Items: Approve за UID.",
                         "- Проверете M365, ако не е добавено:",
                         "- M365 Authentication - Passwordless and SSPR",
@@ -211,8 +202,7 @@
                     ]
                 },
                 {
-                    "ext": "Teams съобщения",
-                    "steps": [
+                    "extra": [
                         "- Достъпът е предоставен. Необходимо е Log Off и Log On. Време за репликиране – 48 часа."
                     ]
                 }
@@ -325,8 +315,7 @@
                     ]
                 },
                 {
-                    "ext": "Добавете тези групи в АД",
-                    "steps": [
+                    "extra": [
                         "- RLG LOS Credit Expert",
                         "- RLG LOS Credit Expert 2",
                         "- RuG LOS Branches",
@@ -334,8 +323,7 @@
                     ]
                 },
                 {
-                    "ext": "За отговорник офис за CAS се дава",
-                    "steps": [
+                    "extra": [
                         "- RlG LOS Branch Manager",
                         "- RlG LOS Credit Expert",
                         "- RlG LOS Credit Expert 2",
